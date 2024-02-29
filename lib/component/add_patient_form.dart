@@ -177,25 +177,25 @@ class _AddPatientFormState extends State<AddPatientForm> {
       print('name ${name!}');
       print('address ${address!}');
       print('age ${age!}');
+      await dataRepository.addPatient(Patients(
+          id: uuid.v4().toString(),
+          name: name!,
+          age: int.parse(age!),
+          address: address!,
+          gender: gender!));
+      if (context.mounted) {
+        toastification.show(
+          context: context,
+          type: ToastificationType.success,
+          title: const Text('Success!'),
+          description: const Text('Added patient successfully'),
+          autoCloseDuration: const Duration(seconds: 3),
+        );
+        Navigator.pop(context);
+      }
     }
     print("CLIKED+++");
 
-    await dataRepository.addPatient(Patients(
-        id: uuid.v4().toString(),
-        name: name!,
-        age: int.parse(age!),
-        address: address!,
-        gender: gender!));
-    if (context.mounted) {
-      toastification.show(
-        context: context,
-        type: ToastificationType.success,
-        title: const Text('Success!'),
-        description: const Text('Added patient successfully'),
-        autoCloseDuration: const Duration(seconds: 3),
-      );
-      Navigator.pop(context);
-    }
     // Navigator.of(context).pop();
     // Navigator.pop(context);
     // context.push(ScreenPaths.collection("collectible.id"));

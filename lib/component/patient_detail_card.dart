@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:material_3_demo/component/patient_detail.dart';
 import 'package:material_3_demo/component/themed_text.dart';
 import 'package:material_3_demo/main.dart';
 import 'package:material_3_demo/modal/Patients.dart';
@@ -19,8 +20,44 @@ class PatientCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void openPatientDetailFullscreenDialog(BuildContext context, String patientId) {
+      showDialog<void>(
+        context: context,
+        builder: (context) => Dialog.fullscreen(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Scaffold(
+              appBar: AppBar(
+                title: const Text('Manage clinic'),
+                centerTitle: false,
+                leading: IconButton(
+                  icon: const Icon(Icons.close),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+                actions: [
+                  TextButton(
+                    child: const Text('Close'),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                ],
+              ),
+              body: Column(
+                children: [
+                  Text("patient detail"),
+                  PatientDetailScreen(patientId: patientId)
+                  // ManageClinic(),
+                  // AddClinicForm()
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
     return GestureDetector(
       onTap: () {
+        openPatientDetailFullscreenDialog(context, patients!.id);
         // context.push(ScreenPaths.patient(patients!.id));
       },
       child: MergeSemantics(
