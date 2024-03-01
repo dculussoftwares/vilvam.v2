@@ -35,40 +35,18 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
           } else if (!snapshot.hasData) {
             content = Center(child: AppLoadingIndicator());
           } else {
-            content = Expanded(
-                child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  PatientAction(patientId: widget.patientId),
-                  _PatientDetailTableColumn(data: data)
-                ],
-              ),
-            ));
-
-            // hzMode
-            //     ? Row(children: [
-            //         Expanded(child: PatientAction(patientId: widget.patientId)),
-            //         Expanded(
-            //             child: Center(
-            //                 child: SizedBox(
-            //                     width: 600,
-            //                     child: _PatientDetailTableColumn(data: p)))),
-            //       ])
-            //     : CustomScrollView(
-            //         slivers: [
-            //           SliverAppBar(
-            //             pinned: true,
-            //             elevation: 0,
-            //             leading: SizedBox.shrink(),
-            //             expandedHeight: context.heightPx * .5,
-            //             collapsedHeight: context.heightPx * .35,
-            //             flexibleSpace:
-            //                 PatientAction(patientId: widget.patientId),
-            //           ),
-            //           SliverToBoxAdapter(
-            //               child: _PatientDetailTableColumn(data: data)),
-            //         ],
-            //       );
+            content = Flex(
+              direction: Axis.horizontal,
+              children: [
+                Expanded(
+                    child: Column(
+                  children: [
+                    PatientAction(patientId: widget.patientId),
+                    _PatientDetailTableColumn(data: data)
+                  ],
+                ))
+              ],
+            );
           }
           return Stack(children: [
             content,

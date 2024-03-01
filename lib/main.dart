@@ -6,6 +6,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:material_3_demo/component/add_consultation.dart';
 import 'package:material_3_demo/modal/ClinicDetail.dart';
 import 'package:material_3_demo/service/DataRepository.dart';
 import 'package:material_3_demo/service/locale_logic.dart';
@@ -189,17 +190,21 @@ class _AppState extends State<App> {
         useMaterial3: useMaterial3,
         brightness: Brightness.dark,
       ),
-      home: Home(
-        useLightMode: useLightMode,
-        useMaterial3: useMaterial3,
-        colorSelected: colorSelected,
-        imageSelected: imageSelected,
-        handleBrightnessChange: handleBrightnessChange,
-        handleMaterialVersionChange: handleMaterialVersionChange,
-        handleColorSelect: handleColorSelect,
-        handleImageSelect: handleImageSelect,
-        colorSelectionMethod: colorSelectionMethod,
-      ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => Home(
+              useLightMode: useLightMode,
+              useMaterial3: useMaterial3,
+              colorSelected: colorSelected,
+              imageSelected: imageSelected,
+              handleBrightnessChange: handleBrightnessChange,
+              handleMaterialVersionChange: handleMaterialVersionChange,
+              handleColorSelect: handleColorSelect,
+              handleImageSelect: handleImageSelect,
+              colorSelectionMethod: colorSelectionMethod,
+            ),
+        '/addConsultation': (context) => AddConsultation(),
+      },
     );
   }
 }

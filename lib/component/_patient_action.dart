@@ -1,5 +1,3 @@
-
-
 import 'package:extra_alignments/extra_alignments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -54,6 +52,10 @@ class _PatientActionState extends State<PatientAction> {
                     text: "Add consultation",
                     isSecondary: true,
                     onPressed: () => {
+                      Navigator.pushNamed(context, '/addConsultation',
+                          arguments: {
+                            'patientId': widget.patientId,
+                          })
                       // context.push(ScreenPaths.addConsultation(
                       //     int.parse(widget.patientId)))
                     },
