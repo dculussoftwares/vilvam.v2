@@ -23,28 +23,5 @@ class AddConsultation extends StatelessWidget {
           patientId: patientId, onConsultationAdd: onConsultationAdd),
     );
 
-    return ClipRect(
-      child: DecoratedBox(
-        decoration: BoxDecoration(color: colorScheme.surface),
-        child: Align(
-            alignment: Alignment.topLeft,
-            // widthFactor: widthAnimation.value,
-            child: Scaffold(
-              body: Expanded(
-                child: Column(
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.arrow_circle_left),
-                      onPressed: () => Navigator.of(context).pop(),
-                    ),
-                    AddConsultationForm(
-                        patientId: patientId,
-                        onConsultationAdd: onConsultationAdd),
-                  ],
-                ),
-              ),
-            )),
-      ),
-    );
   }
 }

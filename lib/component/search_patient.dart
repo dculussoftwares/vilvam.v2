@@ -80,7 +80,7 @@ class _SearchPatientState extends State<SearchPatient> {
                 borderRadius: BorderRadius.circular($styles.insets.xs),
               ),
               child: ConstrainedBox(
-                constraints: const BoxConstraints(),
+                constraints: const BoxConstraints(maxHeight: 200),
                 child: ListView(
                   padding: EdgeInsets.all($styles.insets.xs),
                   shrinkWrap: true,
