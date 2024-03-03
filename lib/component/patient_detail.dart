@@ -9,8 +9,8 @@ import 'package:sized_context/sized_context.dart';
 import '../ui/app_loading_indicator.dart';
 
 class PatientDetailScreen extends StatefulWidget {
-  PatientDetailScreen({Key? key, required this.patientId}) : super(key: key);
-  final String patientId;
+  PatientDetailScreen({super.key, required this.patientId});
+  String patientId;
 
   @override
   State<PatientDetailScreen> createState() => _PatientDetailScreenState();
@@ -84,8 +84,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
 }
 
 class _PatientDetailTableColumn extends StatelessWidget {
-  const _PatientDetailTableColumn({Key? key, required this.data})
-      : super(key: key);
+  _PatientDetailTableColumn({Key? key, required this.data}) : super(key: key);
   final Patients? data;
 
   @override
@@ -155,7 +154,7 @@ class _PatientDetailTableColumn extends StatelessWidget {
 }
 
 class _InfoRow extends StatelessWidget {
-  const _InfoRow(this.label, this.value, {Key? key}) : super(key: key);
+  _InfoRow(this.label, this.value, {Key? key}) : super(key: key);
 
   final String label;
   final String value;

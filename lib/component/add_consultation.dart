@@ -19,7 +19,7 @@ class AddConsultation extends StatelessWidget {
     }
 
     return PageWrapper(
-      widget: AddConsultationForm(
+      child: AddConsultationForm(
           patientId: patientId, onConsultationAdd: onConsultationAdd),
     );
 

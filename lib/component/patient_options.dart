@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_3_demo/component/add_patient_form.dart';
 import 'package:material_3_demo/component/search_patient.dart';
 
@@ -365,7 +366,8 @@ class HealeeOptions extends StatelessWidget {
                           size: 34,
                         ),
                         onPressed: () {
-                          openSearchPatientFullscreenDialog(context);
+                          context.go("/searchPatientPage");
+                          // openSearchPatientFullscreenDialog(context);
                         },
                       ),
                     ),

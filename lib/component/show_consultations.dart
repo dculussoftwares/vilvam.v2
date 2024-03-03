@@ -18,7 +18,7 @@ class ShowConsultation extends StatelessWidget {
     late final _future =
         dataRepository.getAllConsultationByPatientId(patientId);
     return PageWrapper(
-        widget: Column(
+        child: Column(
       children: [
         Text("All consultations"),
         FutureBuilder<List<Consultation>>(

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class PageWrapper extends StatelessWidget {
-  PageWrapper({super.key, required this.widget});
+  PageWrapper({super.key, required this.child});
 
-  Widget widget;
+  Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +17,14 @@ class PageWrapper extends StatelessWidget {
             child: Scaffold(
               body: Expanded(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.arrow_circle_left),
+                      icon: const Icon(size: 34, Icons.chevron_left_outlined),
                       onPressed: () => Navigator.of(context).pop(),
                     ),
-                    ...[widget]
+                    ...[child]
                   ],
                 ),
               ),

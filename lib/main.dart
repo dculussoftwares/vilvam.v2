@@ -10,6 +10,8 @@ import 'package:go_router/go_router.dart';
 import 'package:material_3_demo/component/add_consultation.dart';
 import 'package:material_3_demo/component/show_consultations.dart';
 import 'package:material_3_demo/modal/ClinicDetail.dart';
+import 'package:material_3_demo/pages/patient_detail_page.dart';
+import 'package:material_3_demo/pages/search_patients_page.dart';
 import 'package:material_3_demo/service/DataRepository.dart';
 import 'package:material_3_demo/service/locale_logic.dart';
 import 'package:material_3_demo/service/settings_logic.dart';
@@ -207,6 +209,21 @@ class _AppState extends State<App> {
                 );
               },
             ),
+            GoRoute(
+              path: 'searchPatientPage',
+              builder: (BuildContext context, GoRouterState state) {
+                return const SearchPatientPage();
+              },
+            ),
+            GoRoute(
+              path: 'patientDetailPage/:patientId',
+              builder: (BuildContext context, GoRouterState state) {
+                var patientId = state.pathParameters['patientId'] ?? "";
+                return PatientDetailPage(
+                  patientId: patientId,
+                );
+              },
+            )
           ],
         ),
       ],
