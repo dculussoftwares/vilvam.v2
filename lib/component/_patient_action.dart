@@ -2,6 +2,7 @@ import 'package:extra_alignments/extra_alignments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_3_demo/component/gradient_container.dart';
 import 'package:material_3_demo/main.dart';
 import 'package:material_3_demo/ui/buttons.dart';
@@ -52,10 +53,11 @@ class _PatientActionState extends State<PatientAction> {
                     text: "Add consultation",
                     isSecondary: true,
                     onPressed: () => {
-                      Navigator.pushNamed(context, '/addConsultation',
-                          arguments: {
-                            'patientId': widget.patientId,
-                          })
+                      context.go("/addConsultation/${widget.patientId}")
+                      // Navigator.pushNamed(context, '/addConsultation',
+                      //     arguments: {
+                      //       'patientId': widget.patientId,
+                      //     })
                       // context.push(ScreenPaths.addConsultation(
                       //     int.parse(widget.patientId)))
                     },

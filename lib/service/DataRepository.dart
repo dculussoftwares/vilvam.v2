@@ -1,4 +1,5 @@
 import 'package:material_3_demo/modal/ClinicDetail.dart';
+import 'package:material_3_demo/modal/Consultation.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -90,5 +91,22 @@ class DataRepository {
     List<Patients> patients =
         allRows.map((patient) => Patients.fromMap(patient)).toList();
     return patients;
+  }
+
+  Future<int> addConsultation(Consultation consultation) async {
+    int result = 0;
+    final Database db = await initializedDB();
+    result = await db.insert(CONSULTATION_TABLE, consultation.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
+    return result;
+  }
+
+  Future<List<Consultation>> getAllConsultationByPatientId(int id) async {
+    final Database db = await initializedDB();
+    List<Map<String, dynamic>> allRows = await db.query(CONSULTATION_TABLE,
+        where: 'patientId=?', whereArgs: [id], orderBy: 'createdTime DESC');
+    List<Consultation> consultations =
+        allRows.map((contact) => Consultation.fromMap(contact)).toList();
+    return consultations;
   }
 }

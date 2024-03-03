@@ -6,6 +6,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_3_demo/component/add_consultation.dart';
 import 'package:material_3_demo/modal/ClinicDetail.dart';
 import 'package:material_3_demo/service/DataRepository.dart';
@@ -169,7 +170,39 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     _style = AppStyle(screenSize: context.sizePx);
-    return MaterialApp(
+    final GoRouter _router = GoRouter(
+      routes: <RouteBase>[
+        GoRoute(
+          path: '/',
+          builder: (BuildContext context, GoRouterState state) {
+            return Home(
+              useLightMode: useLightMode,
+              useMaterial3: useMaterial3,
+              colorSelected: colorSelected,
+              imageSelected: imageSelected,
+              handleBrightnessChange: handleBrightnessChange,
+              handleMaterialVersionChange: handleMaterialVersionChange,
+              handleColorSelect: handleColorSelect,
+              handleImageSelect: handleImageSelect,
+              colorSelectionMethod: colorSelectionMethod,
+            );
+          },
+          routes: <RouteBase>[
+            GoRoute(
+              path: 'addConsultation/:patientId',
+              builder: (BuildContext context, GoRouterState state) {
+                var patientId = state.pathParameters['patientId'] ?? "";
+                return AddConsultation(
+                  patientId: patientId,
+                );
+              },
+            ),
+          ],
+        ),
+      ],
+    );
+
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Material 3',
       themeMode: themeMode,
@@ -190,21 +223,7 @@ class _AppState extends State<App> {
         useMaterial3: useMaterial3,
         brightness: Brightness.dark,
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => Home(
-              useLightMode: useLightMode,
-              useMaterial3: useMaterial3,
-              colorSelected: colorSelected,
-              imageSelected: imageSelected,
-              handleBrightnessChange: handleBrightnessChange,
-              handleMaterialVersionChange: handleMaterialVersionChange,
-              handleColorSelect: handleColorSelect,
-              handleImageSelect: handleImageSelect,
-              colorSelectionMethod: colorSelectionMethod,
-            ),
-        '/addConsultation': (context) => AddConsultation(),
-      },
+      routerConfig: _router,
     );
   }
 }
