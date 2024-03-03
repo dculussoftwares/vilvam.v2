@@ -1,52 +1,32 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:material_3_demo/component/themed_text.dart';
-import 'package:material_3_demo/modal/ClinicDetail.dart';
+import 'package:material_3_demo/main.dart';
+import 'package:material_3_demo/modal/Consultation.dart';
 
-import '../main.dart';
-
-class ClinicDetailCard extends StatefulWidget {
-  const ClinicDetailCard({
-    Key? key,
-    required this.clinicDetails,
-    required this.currentIndex,
-    this.darkMode = false,
-  }) : super(key: key);
+class ConsultationDetail extends StatelessWidget {
+  const ConsultationDetail(
+      {Key? key, required this.consultation, this.darkMode = false})
+      : super(key: key);
 
   final bool darkMode;
-  final List<ClinicDetail> clinicDetails;
-  final int currentIndex;
-
-  @override
-  State<ClinicDetailCard> createState() => _ClinicDetailCardState();
-}
-
-class _ClinicDetailCardState extends State<ClinicDetailCard> {
-  // final bool useMaterial3;
-  bool isEnabled = false;
-
-  @override
-  void initState() {
-    super.initState();
-    isEnabled = widget.clinicDetails.elementAt(widget.currentIndex).isEnabled;
-    //your code here
-  }
+  final Consultation? consultation;
 
   @override
   Widget build(BuildContext context) {
-    // isEnabled = widget.consultation!.isEnabled;
-
     return GestureDetector(
-      // onTap: () {
-      //   context.push(ScreenPaths.patient(consultation!.id));
-      // },
+      onTap: () {
+        // context.push(ScreenPaths.patient(consultation!.id));
+      },
       child: MergeSemantics(
         child: Padding(
           padding: EdgeInsets.only(bottom: $styles.insets.sm),
           child: DefaultTextColor(
-            color: widget.darkMode ? Colors.white : Colors.black,
+            color: darkMode ? Colors.white : Colors.black,
             child: Container(
-              color: widget.darkMode
+              color: darkMode
                   ? $styles.colors.greyStrong
                   : $styles.colors.offWhite,
               padding: EdgeInsets.all($styles.insets.sm),
@@ -59,25 +39,10 @@ class _ClinicDetailCardState extends State<ClinicDetailCard> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Status', style: $styles.text.bodySmall),
-                          Switch(
-                              value: isEnabled,
-                              onChanged: (value) async {
-                                setState(() {
-                                  isEnabled = value;
-                                });
-                                var clinicDetail = widget.clinicDetails
-                                    .elementAt(widget.currentIndex);
-                                var updatedClinicDetail = ClinicDetail(
-                                    id: clinicDetail.id,
-                                    name: clinicDetail.name,
-                                    location: clinicDetail.location,
-                                    isEnabled: value);
-                                await dataRepository
-                                    .updateClinicStatus(updatedClinicDetail);
-                                var a = await dataRepository.getAllClinic();
-                                var xxx = 0;
-                              }),
+                          Text(consultation!.patientId.toString(),
+                              style: $styles.text.h3.copyWith(
+                                  fontWeight: FontWeight.w400, height: 1)),
+                          Text('Age', style: $styles.text.bodySmall),
                         ],
                       ),
                     ),
@@ -85,9 +50,7 @@ class _ClinicDetailCardState extends State<ClinicDetailCard> {
                     /// Divider
                     Container(
                         width: 1,
-                        color: widget.darkMode
-                            ? Colors.white
-                            : $styles.colors.black),
+                        color: darkMode ? Colors.white : $styles.colors.black),
 
                     Gap($styles.insets.sm),
 
@@ -96,16 +59,7 @@ class _ClinicDetailCardState extends State<ClinicDetailCard> {
                       child: Column(
                         children: [
                           Focus(
-                              child: Text(
-                                  widget.clinicDetails
-                                      .elementAt(widget.currentIndex)
-                                      .name,
-                                  style: $styles.text.body)),
-                          Focus(
-                              child: Text(
-                                  widget.clinicDetails
-                                      .elementAt(widget.currentIndex)
-                                      .location,
+                              child: Text(consultation!.notes,
                                   style: $styles.text.body)),
                         ],
                       ),

@@ -101,7 +101,7 @@ class DataRepository {
     return result;
   }
 
-  Future<List<Consultation>> getAllConsultationByPatientId(int id) async {
+  Future<List<Consultation>> getAllConsultationByPatientId(String id) async {
     final Database db = await initializedDB();
     List<Map<String, dynamic>> allRows = await db.query(CONSULTATION_TABLE,
         where: 'patientId=?', whereArgs: [id], orderBy: 'createdTime DESC');

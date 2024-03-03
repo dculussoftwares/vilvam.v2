@@ -5,7 +5,7 @@ import 'package:material_3_demo/modal/ClinicDetail.dart';
 import 'package:material_3_demo/ui/failed_to_fetch.dart';
 
 import '../ui/app_loading_indicator.dart';
-import 'consultation_detail_card.dart';
+import 'clinic_detail_card.dart';
 
 class ManageClinic extends StatefulWidget {
   const ManageClinic({super.key});

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_3_demo/component/_add_consultation_form.dart';
+import 'package:material_3_demo/component/page_wrapper.dart';
 
 class AddConsultation extends StatelessWidget {
   String patientId;
@@ -17,6 +18,11 @@ class AddConsultation extends StatelessWidget {
       GoRouter.of(context).pop();
     }
 
+    return PageWrapper(
+      widget: AddConsultationForm(
+          patientId: patientId, onConsultationAdd: onConsultationAdd),
+    );
+
     return ClipRect(
       child: DecoratedBox(
         decoration: BoxDecoration(color: colorScheme.surface),
@@ -25,8 +31,17 @@ class AddConsultation extends StatelessWidget {
             // widthFactor: widthAnimation.value,
             child: Scaffold(
               body: Expanded(
-                child: AddConsultationForm(
-                    patientId: patientId, onConsultationAdd: onConsultationAdd),
+                child: Column(
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.arrow_circle_left),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                    AddConsultationForm(
+                        patientId: patientId,
+                        onConsultationAdd: onConsultationAdd),
+                  ],
+                ),
               ),
             )),
       ),

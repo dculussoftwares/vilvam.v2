@@ -70,6 +70,7 @@ class _PatientActionState extends State<PatientAction> {
                   AppBtn.from(
                     text: "Show consultations",
                     onPressed: () => {
+                      context.go("/showConsultation/${widget.patientId}")
                       // context.push(ScreenPaths.allConsultation(
                       //     int.parse(widget.patientId)))
                     },

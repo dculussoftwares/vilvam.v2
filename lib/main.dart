@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_3_demo/component/add_consultation.dart';
+import 'package:material_3_demo/component/show_consultations.dart';
 import 'package:material_3_demo/modal/ClinicDetail.dart';
 import 'package:material_3_demo/service/DataRepository.dart';
 import 'package:material_3_demo/service/locale_logic.dart';
@@ -193,6 +194,15 @@ class _AppState extends State<App> {
               builder: (BuildContext context, GoRouterState state) {
                 var patientId = state.pathParameters['patientId'] ?? "";
                 return AddConsultation(
+                  patientId: patientId,
+                );
+              },
+            ),
+            GoRoute(
+              path: 'showConsultation/:patientId',
+              builder: (BuildContext context, GoRouterState state) {
+                var patientId = state.pathParameters['patientId'] ?? "";
+                return ShowConsultation(
                   patientId: patientId,
                 );
               },
