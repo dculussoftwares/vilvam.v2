@@ -5,22 +5,15 @@ import 'package:material_3_demo/component/themed_text.dart';
 import 'package:material_3_demo/main.dart';
 import 'package:material_3_demo/modal/Patients.dart';
 
-class PatientCard extends StatelessWidget {
-  const PatientCard(
-      {Key? key,
-      required this.year,
-      required this.text,
-      required this.patients,
-      this.darkMode = false})
-      : super(key: key);
-  final int year;
-  final String text;
-  final bool darkMode;
+class PatientSearchResultCard extends StatelessWidget {
+  const PatientSearchResultCard({super.key, required this.patients});
+
   final Patients? patients;
 
   @override
   Widget build(BuildContext context) {
-    void openPatientDetailFullscreenDialog(BuildContext context, String patientId) {
+    void openPatientDetailFullscreenDialog(
+        BuildContext context, String patientId) {
       showDialog<void>(
         context: context,
         builder: (context) => Dialog.fullscreen(
@@ -43,7 +36,7 @@ class PatientCard extends StatelessWidget {
               ),
               body: Column(
                 children: [
-                  Text("patient detail"),
+                  const Text("patient detail"),
                   PatientDetailScreen(patientId: patientId)
                   // ManageClinic(),
                   // AddClinicForm()
@@ -64,11 +57,9 @@ class PatientCard extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.only(bottom: $styles.insets.sm),
           child: DefaultTextColor(
-            color: darkMode ? Colors.white : Colors.black,
+            color: Colors.white,
             child: Container(
-              color: darkMode
-                  ? $styles.colors.greyStrong
-                  : $styles.colors.offWhite,
+              color: $styles.colors.greyStrong,
               padding: EdgeInsets.all($styles.insets.sm),
               child: IntrinsicHeight(
                 child: Row(
@@ -88,9 +79,7 @@ class PatientCard extends StatelessWidget {
                     ),
 
                     /// Divider
-                    Container(
-                        width: 1,
-                        color: darkMode ? Colors.white : $styles.colors.black),
+                    Container(width: 1, color: Colors.white),
 
                     Gap($styles.insets.sm),
 

@@ -4,7 +4,7 @@ import 'package:material_3_demo/main.dart';
 import 'package:material_3_demo/modal/Patients.dart';
 import 'package:material_3_demo/ui/buttons.dart';
 
-import 'patient_detail_card.dart';
+import 'patient_search_result_card.dart';
 
 class SearchPatient extends StatefulWidget {
   const SearchPatient({super.key});
@@ -19,32 +19,18 @@ class _SearchPatientState extends State<SearchPatient> {
     return LayoutBuilder(
         builder: (ctx, constraints) => Center(
               child: Autocomplete<Patients>(
-                fieldViewBuilder: (BuildContext context,
-                    TextEditingController fieldTextEditingController,
-                    FocusNode fieldFocusNode,
-                    VoidCallback onFieldSubmitted) {
+                fieldViewBuilder: (context, fieldTextEditingController,
+                    fieldFocusNode, onFieldSubmitted) {
                   return TextFormField(
-                    cursorColor: $styles.colors.greyMedium,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter Phone number and Name';
                       }
                       return null;
                     },
-                    decoration: InputDecoration(
-                      hoverColor: Colors.transparent,
-                      hintStyle: TextStyle(color: Colors.black),
-                      labelStyle: TextStyle(color: $styles.colors.greyMedium),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: $styles.colors.accent1, width: 2.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: $styles.colors.accent1, width: 2.0),
-                      ),
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: "Search patients",
+                      labelText: "Search patients by name or phone number",
                     ),
                     controller: fieldTextEditingController,
                     focusNode: fieldFocusNode,
@@ -71,7 +57,7 @@ class _SearchPatientState extends State<SearchPatient> {
           child: AppBtn.basic(
             onPressed: FocusManager.instance.primaryFocus!.unfocus,
             semanticLabel: '',
-            child: SizedBox.expand(),
+            child: const SizedBox.expand(),
           ),
         ),
         TopLeft(
@@ -83,7 +69,7 @@ class _SearchPatientState extends State<SearchPatient> {
                 BoxShadow(
                   color: $styles.colors.black.withOpacity(0.25),
                   blurRadius: 4,
-                  offset: Offset(0, 4),
+                  offset: const Offset(0, 4),
                 ),
               ],
             ),
@@ -94,7 +80,7 @@ class _SearchPatientState extends State<SearchPatient> {
                 borderRadius: BorderRadius.circular($styles.insets.xs),
               ),
               child: ConstrainedBox(
-                constraints: BoxConstraints(),
+                constraints: const BoxConstraints(),
                 child: ListView(
                   padding: EdgeInsets.all($styles.insets.xs),
                   shrinkWrap: true,
@@ -123,7 +109,7 @@ class _SearchPatientState extends State<SearchPatient> {
             "Suggestions".toUpperCase(),
             overflow: TextOverflow.ellipsis,
             textHeightBehavior:
-                TextHeightBehavior(applyHeightToFirstAscent: false),
+                const TextHeightBehavior(applyHeightToFirstAscent: false),
           ),
         ),
       ),
@@ -143,11 +129,9 @@ class _SearchPatientState extends State<SearchPatient> {
                 .copyWith(color: $styles.colors.greyStrong),
             child: Column(
               children: [
-                PatientCard(
-                    patients: patient,
-                    year: 2002,
-                    text: patient.name,
-                    darkMode: true),
+                PatientSearchResultCard(
+                  patients: patient,
+                ),
               ],
             ),
           ),
