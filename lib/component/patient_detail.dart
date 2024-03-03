@@ -9,6 +9,7 @@ import '../ui/app_loading_indicator.dart';
 
 class PatientDetailScreen extends StatefulWidget {
   PatientDetailScreen({super.key, required this.patientId});
+
   String patientId;
 
   @override
@@ -20,37 +21,34 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ColoredBox(
-      color: $styles.colors.greyStrong,
-      child: FutureBuilder<Patients?>(
-        future: _future,
-        builder: (_, snapshot) {
-          final data = snapshot.data;
-          late Widget content;
-          if (snapshot.hasError || (snapshot.hasData && data == null)) {
-            content = _buildError();
-          } else if (!snapshot.hasData) {
-            content = const Center(child: AppLoadingIndicator());
-          } else {
-            content = Flex(
-              direction: Axis.horizontal,
-              children: [
-                Expanded(
-                    child: Column(
-                  children: [
-                    PatientAction(patientId: widget.patientId),
-                    _PatientDetailTableColumn(data: data)
-                  ],
-                ))
-              ],
-            );
-          }
-          return Stack(children: [
-            content,
-            // AppHeader(isTransparent: true),
-          ]);
-        },
-      ),
+    return FutureBuilder<Patients?>(
+      future: _future,
+      builder: (_, snapshot) {
+        final data = snapshot.data;
+        late Widget content;
+        if (snapshot.hasError || (snapshot.hasData && data == null)) {
+          content = _buildError();
+        } else if (!snapshot.hasData) {
+          content = const Center(child: AppLoadingIndicator());
+        } else {
+          content = Flex(
+            direction: Axis.horizontal,
+            children: [
+              Expanded(
+                  child: Column(
+                children: [
+                  PatientAction(patientId: widget.patientId),
+                  PatientDetailTableColumn(data: data)
+                ],
+              ))
+            ],
+          );
+        }
+        return Stack(children: [
+          content,
+          // AppHeader(isTransparent: true),
+        ]);
+      },
     );
     // return Text("Ommm");
   }
@@ -80,8 +78,8 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
   }
 }
 
-class _PatientDetailTableColumn extends StatelessWidget {
-  _PatientDetailTableColumn({Key? key, required this.data}) : super(key: key);
+class PatientDetailTableColumn extends StatelessWidget {
+  PatientDetailTableColumn({Key? key, required this.data}) : super(key: key);
   final Patients? data;
 
   @override
@@ -90,15 +88,15 @@ class _PatientDetailTableColumn extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Gap($styles.insets.xl),
-          if (data!.name.isNotEmpty) ...[
-            Text(
-              data!.name.toUpperCase(),
-              style: $styles.text.titleFont
-                  .copyWith(color: $styles.colors.accent1),
-            ).animate().fade(delay: 150.ms, duration: 600.ms),
-            Gap($styles.insets.xs),
-          ],
+          // Gap($styles.insets.xl),
+          // if (data!.name.isNotEmpty) ...[
+          //   Text(
+          //     data!.name.toUpperCase(),
+          //     style: $styles.text.titleFont
+          //         .copyWith(color: $styles.colors.accent1),
+          //   ).animate().fade(delay: 150.ms, duration: 600.ms),
+          //   Gap($styles.insets.xs),
+          // ],
           Semantics(
             header: true,
             child: Text(
@@ -110,12 +108,6 @@ class _PatientDetailTableColumn extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ).animate().fade(delay: 250.ms, duration: 600.ms),
           ),
-          Gap($styles.insets.lg),
-          Animate().toggle(
-              delay: 500.ms,
-              builder: (_, value, __) {
-                return Text("Loading...");
-              }),
           Gap($styles.insets.lg),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,8 +126,7 @@ class _PatientDetailTableColumn extends StatelessWidget {
           Gap($styles.insets.md),
           Text(
             "The Metropolitan Museum of Art, New York",
-            style:
-                $styles.text.caption.copyWith(color: $styles.colors.accent2),
+            style: $styles.text.caption.copyWith(color: $styles.colors.accent2),
           )
               .animate(delay: 1.5.seconds)
               .fadeIn()
@@ -165,16 +156,12 @@ class _InfoRow extends StatelessWidget {
               flex: 40,
               child: Text(
                 label.toUpperCase(),
-                style: $styles.text.titleFont
-                    .copyWith(color: $styles.colors.accent2),
               ),
             ),
             Expanded(
               flex: 60,
               child: Text(
                 value.isEmpty ? '--' : value,
-                style:
-                    $styles.text.body.copyWith(color: $styles.colors.offWhite),
               ),
             ),
           ]),
