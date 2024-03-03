@@ -15,7 +15,9 @@ class PageWrapper extends StatelessWidget {
             alignment: Alignment.topLeft,
             // widthFactor: widthAnimation.value,
             child: Scaffold(
-              body: Expanded(
+              body: Padding(
+                // padding: const EdgeInsets.symmetric(vertical: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
