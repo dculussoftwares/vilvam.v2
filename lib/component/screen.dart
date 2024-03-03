@@ -218,7 +218,6 @@ class Actions extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ComponentGroupDecoration(label: 'Actions', children: <Widget>[
       Buttons(),
-      FloatingActionButtons(),
       IconToggleButtons(),
       SegmentedButtons(),
     ]);
@@ -272,7 +271,6 @@ class Navigation extends StatelessWidget {
         isExampleBar: true,
       ),
       NavigationDrawers(scaffoldKey: scaffoldKey),
-      const NavigationRails(),
       const Tabs(),
       const SearchAnchors(),
       const TopAppBars(),
@@ -430,46 +428,7 @@ class ButtonsWithIcon extends StatelessWidget {
   }
 }
 
-class FloatingActionButtons extends StatelessWidget {
-  const FloatingActionButtons({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return ComponentDecoration(
-      label: 'Floating action buttons',
-      tooltipMessage:
-          'Use FloatingActionButton or FloatingActionButton.extended',
-      child: Wrap(
-        crossAxisAlignment: WrapCrossAlignment.center,
-        runSpacing: smallSpacing,
-        spacing: smallSpacing,
-        children: [
-          FloatingActionButton.small(
-            onPressed: () {},
-            tooltip: 'Small',
-            child: const Icon(Icons.add),
-          ),
-          FloatingActionButton.extended(
-            onPressed: () {},
-            tooltip: 'Extended',
-            icon: const Icon(Icons.add),
-            label: const Text('Create'),
-          ),
-          FloatingActionButton(
-            onPressed: () {},
-            tooltip: 'Standard',
-            child: const Icon(Icons.add),
-          ),
-          FloatingActionButton.large(
-            onPressed: () {},
-            tooltip: 'Large',
-            child: const Icon(Icons.add),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 class Cards extends StatelessWidget {
   const Cards({super.key});
@@ -1998,56 +1957,6 @@ const List<ExampleDestination> labelDestinations = <ExampleDestination>[
   ExampleDestination('Work', Icon(Icons.bookmark_border), Icon(Icons.bookmark)),
 ];
 
-class NavigationRails extends StatelessWidget {
-  const NavigationRails({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const ComponentDecoration(
-      label: 'Navigation rail',
-      tooltipMessage: 'Use NavigationRail',
-      child: IntrinsicWidth(
-          child: SizedBox(height: 420, child: NavigationRailSection())),
-    );
-  }
-}
-
-class NavigationRailSection extends StatefulWidget {
-  const NavigationRailSection({super.key});
-
-  @override
-  State<NavigationRailSection> createState() => _NavigationRailSectionState();
-}
-
-class _NavigationRailSectionState extends State<NavigationRailSection> {
-  int navRailIndex = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return NavigationRail(
-      onDestinationSelected: (selectedIndex) {
-        setState(() {
-          navRailIndex = selectedIndex;
-        });
-      },
-      elevation: 4,
-      leading: FloatingActionButton(
-          child: const Icon(Icons.create), onPressed: () {}),
-      groupAlignment: 0.0,
-      selectedIndex: navRailIndex,
-      labelType: NavigationRailLabelType.selected,
-      destinations: <NavigationRailDestination>[
-        ...destinations.map((destination) {
-          return NavigationRailDestination(
-            label: Text(destination.label),
-            icon: destination.icon,
-            selectedIcon: destination.selectedIcon,
-          );
-        }),
-      ],
-    );
-  }
-}
 
 class Tabs extends StatefulWidget {
   const Tabs({super.key});

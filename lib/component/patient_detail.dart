@@ -4,7 +4,6 @@ import 'package:gap/gap.dart';
 import 'package:material_3_demo/component/_patient_action.dart';
 import 'package:material_3_demo/main.dart';
 import 'package:material_3_demo/modal/Patients.dart';
-import 'package:sized_context/sized_context.dart';
 
 import '../ui/app_loading_indicator.dart';
 
@@ -21,19 +20,17 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    bool hzMode = context.isLandscape;
     return ColoredBox(
       color: $styles.colors.greyStrong,
       child: FutureBuilder<Patients?>(
         future: _future,
         builder: (_, snapshot) {
-          Patients? p = snapshot.data;
           final data = snapshot.data;
           late Widget content;
           if (snapshot.hasError || (snapshot.hasData && data == null)) {
             content = _buildError();
           } else if (!snapshot.hasData) {
-            content = Center(child: AppLoadingIndicator());
+            content = const Center(child: AppLoadingIndicator());
           } else {
             content = Flex(
               direction: Axis.horizontal,
@@ -89,65 +86,62 @@ class _PatientDetailTableColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: $styles.insets.lg),
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Gap($styles.insets.xl),
-            if (data!.name.isNotEmpty) ...[
-              Text(
-                data!.name.toUpperCase(),
-                style: $styles.text.titleFont
-                    .copyWith(color: $styles.colors.accent1),
-              ).animate().fade(delay: 150.ms, duration: 600.ms),
-              Gap($styles.insets.xs),
-            ],
-            Semantics(
-              header: true,
-              child: Text(
-                data!.name,
-                textAlign: TextAlign.center,
-                style: $styles.text.h2
-                    .copyWith(color: $styles.colors.offWhite, height: 1.2),
-                maxLines: 5,
-                overflow: TextOverflow.ellipsis,
-              ).animate().fade(delay: 250.ms, duration: 600.ms),
-            ),
-            Gap($styles.insets.lg),
-            Animate().toggle(
-                delay: 500.ms,
-                builder: (_, value, __) {
-                  return Text("Loading...");
-                }),
-            Gap($styles.insets.lg),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ...[
-                  _InfoRow("Name", data!.name),
-                  _InfoRow("Address", data!.address),
-                  _InfoRow("Id", data!.id.toString()),
-                  _InfoRow("Age", data!.age.toString()),
-                ]
-                    .animate(interval: 100.ms)
-                    .fadeIn(delay: 600.ms, duration: $styles.times.med)
-                    .slide(begin: Offset(0.2, 0), curve: Curves.easeOut),
-              ],
-            ),
-            Gap($styles.insets.md),
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Gap($styles.insets.xl),
+          if (data!.name.isNotEmpty) ...[
             Text(
-              "The Metropolitan Museum of Art, New York",
-              style:
-                  $styles.text.caption.copyWith(color: $styles.colors.accent2),
-            )
-                .animate(delay: 1.5.seconds)
-                .fadeIn()
-                .slide(begin: Offset(0.2, 0), curve: Curves.easeOut),
-            Gap($styles.insets.offset),
+              data!.name.toUpperCase(),
+              style: $styles.text.titleFont
+                  .copyWith(color: $styles.colors.accent1),
+            ).animate().fade(delay: 150.ms, duration: 600.ms),
+            Gap($styles.insets.xs),
           ],
-        ),
+          Semantics(
+            header: true,
+            child: Text(
+              data!.name,
+              textAlign: TextAlign.center,
+              style: $styles.text.h2
+                  .copyWith(color: $styles.colors.offWhite, height: 1.2),
+              maxLines: 5,
+              overflow: TextOverflow.ellipsis,
+            ).animate().fade(delay: 250.ms, duration: 600.ms),
+          ),
+          Gap($styles.insets.lg),
+          Animate().toggle(
+              delay: 500.ms,
+              builder: (_, value, __) {
+                return Text("Loading...");
+              }),
+          Gap($styles.insets.lg),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ...[
+                _InfoRow("Name", data!.name),
+                _InfoRow("Address", data!.address),
+                _InfoRow("Id", data!.id.toString()),
+                _InfoRow("Age", data!.age.toString()),
+              ]
+                  .animate(interval: 100.ms)
+                  .fadeIn(delay: 600.ms, duration: $styles.times.med)
+                  .slide(begin: Offset(0.2, 0), curve: Curves.easeOut),
+            ],
+          ),
+          Gap($styles.insets.md),
+          Text(
+            "The Metropolitan Museum of Art, New York",
+            style:
+                $styles.text.caption.copyWith(color: $styles.colors.accent2),
+          )
+              .animate(delay: 1.5.seconds)
+              .fadeIn()
+              .slide(begin: Offset(0.2, 0), curve: Curves.easeOut),
+          Gap($styles.insets.offset),
+        ],
       ),
     );
   }

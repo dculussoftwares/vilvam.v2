@@ -13,42 +13,6 @@ class PatientSearchResultCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // void openPatientDetailFullscreenDialog(
-    //     BuildContext context, String patientId) {
-    //   showDialog<void>(
-    //     context: context,
-    //     builder: (context) => Dialog.fullscreen(
-    //       child: Padding(
-    //         padding: const EdgeInsets.all(20.0),
-    //         child: Scaffold(
-    //           appBar: AppBar(
-    //             title: const Text('Manage clinic'),
-    //             centerTitle: false,
-    //             leading: IconButton(
-    //               icon: const Icon(Icons.close),
-    //               onPressed: () => Navigator.of(context).pop(),
-    //             ),
-    //             actions: [
-    //               TextButton(
-    //                 child: const Text('Close'),
-    //                 onPressed: () => Navigator.of(context).pop(),
-    //               ),
-    //             ],
-    //           ),
-    //           body: Column(
-    //             children: [
-    //               const Text("patient detail"),
-    //               PatientDetailScreen(patientId: patientId)
-    //               // ManageClinic(),
-    //               // AddClinicForm()
-    //             ],
-    //           ),
-    //         ),
-    //       ),
-    //     ),
-    //   );
-    // }
-
     return GestureDetector(
       onTap: () {
         var patientId = patients?.id ?? "";
