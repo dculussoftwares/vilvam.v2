@@ -428,8 +428,6 @@ class ButtonsWithIcon extends StatelessWidget {
   }
 }
 
-
-
 class Cards extends StatelessWidget {
   const Cards({super.key});
 
@@ -1957,7 +1955,6 @@ const List<ExampleDestination> labelDestinations = <ExampleDestination>[
   ExampleDestination('Work', Icon(Icons.bookmark_border), Icon(Icons.bookmark)),
 ];
 
-
 class Tabs extends StatefulWidget {
   const Tabs({super.key});
 
@@ -2337,12 +2334,12 @@ class _SearchAnchorsState extends State<SearchAnchors> {
 class ComponentDecoration extends StatefulWidget {
   const ComponentDecoration({
     super.key,
-    required this.label,
+    this.label,
     required this.child,
     this.tooltipMessage = '',
   });
 
-  final String label;
+  final String? label;
   final Widget child;
   final String? tooltipMessage;
 
@@ -2363,8 +2360,10 @@ class _ComponentDecorationState extends State<ComponentDecoration> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(widget.label,
-                    style: Theme.of(context).textTheme.titleSmall),
+                widget.label!.isNotEmpty
+                    ? Text(widget.label ?? "",
+                        style: Theme.of(context).textTheme.titleSmall)
+                    : Text(""),
                 Tooltip(
                   message: widget.tooltipMessage,
                   child: const Padding(

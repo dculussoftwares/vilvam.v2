@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
 import 'package:material_3_demo/component/_patient_action.dart';
+import 'package:material_3_demo/component/info_row.dart';
 import 'package:material_3_demo/component/total_consultation_widget.dart';
 import 'package:material_3_demo/main.dart';
 import 'package:material_3_demo/modal/Patients.dart';
@@ -108,12 +109,12 @@ class PatientDetailTableColumn extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ...[
-                _InfoRow("Name", data!.name),
-                _InfoRow("Address", data!.address),
-                _InfoRow("Age", data!.age.toString()),
-                _InfoRow("Gender", Gender[data!.gender.toString()]!),
-                _InfoRow("Phone number", data!.phoneNumber.toString()),
-                _InfoRow("Id", data!.id.toString()),
+                InfoRow("Name", data!.name),
+                InfoRow("Address", data!.address),
+                InfoRow("Age", data!.age.toString()),
+                InfoRow("Gender", Gender[data!.gender.toString()]!),
+                InfoRow("Phone number", data!.phoneNumber.toString()),
+                InfoRow("Id", data!.id.toString()),
               ]
                   .animate(interval: 100.ms)
                   .fadeIn(delay: 600.ms, duration: $styles.times.med)
@@ -130,39 +131,6 @@ class PatientDetailTableColumn extends StatelessWidget {
           //     .slide(begin: Offset(0.2, 0), curve: Curves.easeOut),
           // Gap($styles.insets.offset),
         ],
-      ),
-    );
-  }
-}
-
-class _InfoRow extends StatelessWidget {
-  _InfoRow(this.label, this.value, {Key? key}) : super(key: key);
-
-  final String label;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    return ExcludeSemantics(
-      excluding: value.isEmpty,
-      child: MergeSemantics(
-        child: Padding(
-          padding: EdgeInsets.only(bottom: $styles.insets.sm),
-          child: Row(children: [
-            Expanded(
-              flex: 40,
-              child: Text(
-                label.toUpperCase(),
-              ),
-            ),
-            Expanded(
-              flex: 60,
-              child: Text(
-                value.isEmpty ? '--' : value,
-              ),
-            ),
-          ]),
-        ),
       ),
     );
   }

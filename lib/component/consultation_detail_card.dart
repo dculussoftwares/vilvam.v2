@@ -1,18 +1,19 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
+import 'package:material_3_demo/component/info_row.dart';
 import 'package:material_3_demo/component/themed_text.dart';
 import 'package:material_3_demo/main.dart';
 import 'package:material_3_demo/modal/Consultation.dart';
+import 'package:material_3_demo/modal/PatientConsultation.dart';
 
 class ConsultationDetail extends StatelessWidget {
   const ConsultationDetail(
-      {Key? key, required this.consultation, this.darkMode = false})
+      {Key? key, this.darkMode = false, required this.clinicConsultation})
       : super(key: key);
 
   final bool darkMode;
-  final Consultation? consultation;
+  final ClinicConsultation clinicConsultation;
 
   @override
   Widget build(BuildContext context) {
@@ -33,37 +34,25 @@ class ConsultationDetail extends StatelessWidget {
               child: IntrinsicHeight(
                 child: Row(
                   children: [
-                    /// Date
-                    SizedBox(
-                      width: 75,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(consultation!.patientId.toString(),
-                              style: $styles.text.h3.copyWith(
-                                  fontWeight: FontWeight.w400, height: 1)),
-                          Text('Age', style: $styles.text.bodySmall),
-                        ],
-                      ),
-                    ),
-
-                    /// Divider
-                    Container(
-                        width: 1,
-                        color: darkMode ? Colors.white : $styles.colors.black),
-
-                    Gap($styles.insets.sm),
-
                     /// Text content
                     Expanded(
-                      child: Column(
-                        children: [
-                          Focus(
-                              child: Text(consultation!.notes,
-                                  style: $styles.text.body)),
-                        ],
-                      ),
-                    ),
+                        child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ...[
+                          InfoRow(
+                              "Notes:", clinicConsultation.consultation.notes),
+                          InfoRow("Clinic name:",
+                              clinicConsultation.clinicDetails.name),
+                          InfoRow("Clinic location:",
+                              clinicConsultation.clinicDetails.location),
+                        ]
+                            .animate(interval: 100.ms)
+                            .fadeIn(delay: 600.ms, duration: $styles.times.med)
+                            .slide(
+                                begin: Offset(0.2, 0), curve: Curves.easeOut),
+                      ],
+                    )),
                   ],
                 ),
               ),
