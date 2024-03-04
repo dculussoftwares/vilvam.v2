@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:material_3_demo/component/patient_detail.dart';
 import 'package:material_3_demo/component/themed_text.dart';
 import 'package:material_3_demo/main.dart';
 import 'package:material_3_demo/modal/Patients.dart';
@@ -57,11 +56,12 @@ class PatientSearchResultCard extends StatelessWidget {
                           Focus(
                               child: Text(patients!.name,
                                   style: $styles.text.body)),
-                          Focus(
-                              child: Text(patients!.age.toString(),
-                                  style: $styles.text.body)),
+
                           Focus(
                               child: Text(patients!.address.toString(),
+                                  style: $styles.text.body)),
+                          Focus(
+                              child: Text(patients!.phoneNumber.toString(),
                                   style: $styles.text.body)),
                         ],
                       ),

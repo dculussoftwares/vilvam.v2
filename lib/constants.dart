@@ -3,6 +3,9 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:gap/gap.dart';
+import 'package:material_3_demo/main.dart';
 
 // NavigationRail shows if the screen width is greater or equal to
 // narrowScreenWidthThreshold; otherwise, NavigationBar is used for navigation.
@@ -20,6 +23,13 @@ enum ColorSelectionMethod {
   image,
 }
 
+var Gender = {
+  'male': "Male",
+  'female': "Female",
+  'trans_gender': "Trans gender",
+  'other_gender': "Other gender"
+};
+
 enum ColorSeed {
   baseColor('M3 Baseline', Color(0xff6750a4)),
   indigo('Indigo', Colors.indigo),
@@ -32,6 +42,7 @@ enum ColorSeed {
   pink('Pink', Colors.pink);
 
   const ColorSeed(this.label, this.color);
+
   final String label;
   final Color color;
 }
@@ -51,6 +62,7 @@ enum ColorImageProvider {
       'https://flutter.github.io/assets-for-api-docs/assets/material/content_based_color_scheme_6.png');
 
   const ColorImageProvider(this.label, this.url);
+
   final String label;
   final String url;
 }
@@ -62,5 +74,31 @@ enum ScreenSelected {
   elevation(3);
 
   const ScreenSelected(this.value);
+
   final int value;
+}
+
+
+Animate GenericError() {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Center(
+          child: Icon(
+            Icons.warning_amber_outlined,
+            color: $styles.colors.accent1,
+            size: $styles.insets.lg,
+          )),
+      Gap($styles.insets.xs),
+      SizedBox(
+        width: $styles.insets.xxl * 3,
+        child: Text(
+          "Unable to find info for artifact",
+          style: $styles.text.body.copyWith(color: $styles.colors.offWhite),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    ],
+  ).animate().fadeIn();
 }

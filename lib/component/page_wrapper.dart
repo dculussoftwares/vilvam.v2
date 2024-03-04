@@ -15,19 +15,21 @@ class PageWrapper extends StatelessWidget {
             alignment: Alignment.topLeft,
             // widthFactor: widthAnimation.value,
             child: Scaffold(
-              body: Padding(
-                // padding: const EdgeInsets.symmetric(vertical: 20.0),
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: const Icon(size: 34, Icons.chevron_left_outlined),
-                      onPressed: () => Navigator.of(context).pop(),
-                    ),
-                    ...[child]
-                  ],
+              body: SingleChildScrollView(
+                child: Padding(
+                  // padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: const Icon(size: 34, Icons.chevron_left_outlined),
+                        onPressed: () => Navigator.of(context).pop(),
+                      ),
+                      ...[child]
+                    ],
+                  ),
                 ),
               ),
             )),

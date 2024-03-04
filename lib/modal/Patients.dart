@@ -2,17 +2,18 @@ class Patients {
   late final String id;
   late final String name;
   late final int age;
+  late final int phoneNumber;
   late final String address;
   late final String gender;
   late int createdTime = DateTime.now().millisecondsSinceEpoch;
 
-  Patients({
-    required this.id,
-    required this.name,
-    required this.age,
-    required this.address,
-    required this.gender,
-  });
+  Patients(
+      {required this.id,
+      required this.name,
+      required this.age,
+      required this.address,
+      required this.gender,
+      required this.phoneNumber});
 
   Patients.fromMap(Map<String, dynamic> result)
       : id = result['id'] as String,
@@ -20,7 +21,8 @@ class Patients {
         age = result['age'] as int,
         address = result['address'] as String,
         gender = result['gender'] as String,
-        createdTime = result['createdTime'] as int;
+        createdTime = result['createdTime'] as int,
+        phoneNumber = result['phoneNumber'] as int;
 
   Map<String, Object> toMap() {
     return {
@@ -29,7 +31,8 @@ class Patients {
       'age': age,
       'address': address,
       'gender': gender,
-      'createdTime': createdTime
+      'createdTime': createdTime,
+      'phoneNumber': phoneNumber,
     };
   }
 }

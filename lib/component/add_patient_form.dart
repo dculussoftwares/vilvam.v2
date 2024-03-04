@@ -22,6 +22,7 @@ class _AddPatientFormState extends State<AddPatientForm> {
   final _formKey = GlobalKey<FormState>();
   String? name;
   String? age;
+  String? phoneNumber;
   String? address;
   String? gender = 'male';
   var uuid = const Uuid();
@@ -80,24 +81,13 @@ class _AddPatientFormState extends State<AddPatientForm> {
                         print("AGEEEEE");
                         age = value;
                       }),
-                  // DropdownButtonFormField<Gender>(
-                  //     validator: (value) {
-                  //       if (value == null || value.key.isEmpty) {
-                  //         return $strings.gender_required_error;
-                  //       }
-                  //       return null;
-                  //     },
-                  //     value: genderDropdownValue,
-                  //     items: genderList
-                  //         .map<DropdownMenuItem<Gender>>((Gender gender) {
-                  //       return DropdownMenuItem<Gender>(
-                  //         value: gender,
-                  //         child: Text(gender.value),
-                  //       );
-                  //     }).toList(),
-                  //     onChanged: (Gender? value) {
-                  //       gender = value?.key;
-                  //     }),
+                  FormTextField(
+                      showNumberKeyboardOnly: true,
+                      labelName: "Phone number",
+                      validationMessage: "Phone number is required",
+                      onSaved: (value) {
+                        phoneNumber = value;
+                      }),
                   FormFieldDropdown<Gender>(
                     onChanged: (Gender? value) {
                       gender = value?.key;
@@ -181,6 +171,7 @@ class _AddPatientFormState extends State<AddPatientForm> {
           id: uuid.v4().toString(),
           name: name!,
           age: int.parse(age!),
+          phoneNumber: int.parse(phoneNumber!),
           address: address!,
           gender: gender!));
       if (context.mounted) {

@@ -33,10 +33,12 @@ Future<int> addPatients() async {
       age: 24,
       id: uuid.v4().toString(),
       address: "omm",
-      gender: "male");
+      gender: "male",
+      phoneNumber: 12345678);
   Patients secondPlanet = Patients(
       name: "Venus",
       age: 31,
+      phoneNumber: 12345678,
       id: uuid.v4().toString(),
       address: "omm",
       gender: "female");
@@ -44,12 +46,14 @@ Future<int> addPatients() async {
       id: uuid.v4().toString(),
       name: 'Earth',
       age: 4,
+      phoneNumber: 12345678,
       address: "omm",
       gender: "trans_gender");
   Patients fourthPlanet = Patients(
       id: uuid.v4().toString(),
       name: 'Mars',
       age: 5,
+      phoneNumber: 12345678,
       address: "omm",
       gender: "other_gender");
 

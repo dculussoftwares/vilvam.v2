@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
 import 'package:material_3_demo/component/_patient_action.dart';
+import 'package:material_3_demo/component/total_consultation_widget.dart';
 import 'package:material_3_demo/main.dart';
 import 'package:material_3_demo/modal/Patients.dart';
 
+import '../constants.dart';
 import '../ui/app_loading_indicator.dart';
 
 class PatientDetailScreen extends StatefulWidget {
@@ -38,7 +40,8 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
                   child: Column(
                 children: [
                   PatientAction(patientId: widget.patientId),
-                  PatientDetailTableColumn(data: data)
+                  PatientDetailTableColumn(data: data),
+                  TotalConsultation(patientId: widget.patientId)
                 ],
               ))
             ],
@@ -88,22 +91,14 @@ class PatientDetailTableColumn extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Gap($styles.insets.xl),
-          // if (data!.name.isNotEmpty) ...[
-          //   Text(
-          //     data!.name.toUpperCase(),
-          //     style: $styles.text.titleFont
-          //         .copyWith(color: $styles.colors.accent1),
-          //   ).animate().fade(delay: 150.ms, duration: 600.ms),
-          //   Gap($styles.insets.xs),
-          // ],
+          Gap($styles.insets.lg),
           Semantics(
             header: true,
             child: Text(
               data!.name,
               textAlign: TextAlign.center,
               style: $styles.text.h2
-                  .copyWith(color: $styles.colors.offWhite, height: 1.2),
+                  .copyWith(color: $styles.colors.black, height: 1.2),
               maxLines: 5,
               overflow: TextOverflow.ellipsis,
             ).animate().fade(delay: 250.ms, duration: 600.ms),
@@ -115,8 +110,10 @@ class PatientDetailTableColumn extends StatelessWidget {
               ...[
                 _InfoRow("Name", data!.name),
                 _InfoRow("Address", data!.address),
-                _InfoRow("Id", data!.id.toString()),
                 _InfoRow("Age", data!.age.toString()),
+                _InfoRow("Gender", Gender[data!.gender.toString()]!),
+                _InfoRow("Phone number", data!.phoneNumber.toString()),
+                _InfoRow("Id", data!.id.toString()),
               ]
                   .animate(interval: 100.ms)
                   .fadeIn(delay: 600.ms, duration: $styles.times.med)
@@ -124,14 +121,14 @@ class PatientDetailTableColumn extends StatelessWidget {
             ],
           ),
           Gap($styles.insets.md),
-          Text(
-            "The Metropolitan Museum of Art, New York",
-            style: $styles.text.caption.copyWith(color: $styles.colors.accent2),
-          )
-              .animate(delay: 1.5.seconds)
-              .fadeIn()
-              .slide(begin: Offset(0.2, 0), curve: Curves.easeOut),
-          Gap($styles.insets.offset),
+          // Text(
+          //   "The Metropolitan Museum of Art, New York",
+          //   style: $styles.text.caption.copyWith(color: $styles.colors.accent2),
+          // )
+          //     .animate(delay: 1.5.seconds)
+          //     .fadeIn()
+          //     .slide(begin: Offset(0.2, 0), curve: Curves.easeOut),
+          // Gap($styles.insets.offset),
         ],
       ),
     );

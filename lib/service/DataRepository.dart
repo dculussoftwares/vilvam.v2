@@ -13,11 +13,11 @@ class DataRepository {
   Future<Database> initializedDB() async {
     String path = await getDatabasesPath();
     return openDatabase(
-      join(path, 'patients6.db'),
+      join(path, 'patients7.db'),
       version: 1,
       onCreate: (Database db, int version) async {
         await db.execute(
-          'CREATE TABLE $PATIENTS_TABLE(id TEXT PRIMARY KEY , name TEXT NOT NULL,age INTEGER NOT NULL,address TEXT NOT NULL,gender TEXT NOT NULL,createdTime INTEGER NOT NULL)',
+          'CREATE TABLE $PATIENTS_TABLE(id TEXT PRIMARY KEY , name TEXT NOT NULL,age INTEGER NOT NULL,address TEXT NOT NULL,gender TEXT NOT NULL,createdTime INTEGER NOT NULL,phoneNumber INTEGER NOT NULL)',
         );
         await db.execute(
           'CREATE TABLE $CONSULTATION_TABLE(id TEXT PRIMARY KEY ,notes TEXT NOT NULL,patientId INTEGER NOT NULL,createdTime INTEGER NOT NULL)',
@@ -74,6 +74,20 @@ class DataRepository {
     return Sqflite.firstIntValue(result);
   }
 
+  Future<int?> totalConsultationCountByPatient(String patientId) async {
+    final Database db = await initializedDB();
+    // final result =
+    //     await db.rawQuery('SELECT COUNT(*) FROM  $CONSULTATION_TABLE');
+    // return Sqflite.firstIntValue(result);
+    return Sqflite.firstIntValue(await db.query(
+          CONSULTATION_TABLE,
+          columns: ['COUNT(*)'],
+          where: 'patientId = ?',
+          whereArgs: [patientId],
+        )) ??
+        0;
+  }
+
   Future<Patients?> getPatientById(String patientId) async {
     final Database db = await initializedDB();
     var response =
@@ -85,9 +99,9 @@ class DataRepository {
       String keyword) async {
     final Database db = await initializedDB();
     List<Map<String, dynamic>> allRows = await db.query(PATIENTS_TABLE,
-        where: 'name LIKE ? OR address LIKE ?',
-        whereArgs: ['%$keyword%', '%$keyword%'],
-        orderBy: 'name ASC, address ASC');
+        where: 'name LIKE ? OR phoneNumber LIKE ? OR address LIKE ?',
+        whereArgs: ['%$keyword%', '%$keyword%', '%$keyword%'],
+        orderBy: 'name ASC, phoneNumber ASC, address ASC');
     List<Patients> patients =
         allRows.map((patient) => Patients.fromMap(patient)).toList();
     return patients;
