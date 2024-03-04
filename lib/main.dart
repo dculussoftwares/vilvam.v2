@@ -25,6 +25,8 @@ import 'home.dart';
 import 'modal/Patients.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'pages/manage_clinic_page.dart';
+
 var uuid = const Uuid();
 
 Future<int> addPatients() async {
@@ -226,6 +228,12 @@ class _AppState extends State<App> {
                 return PatientDetailPage(
                   patientId: patientId,
                 );
+              },
+            ),
+            GoRoute(
+              path: 'manageClinicPage',
+              builder: (BuildContext context, GoRouterState state) {
+                return ManageClinicPage();
               },
             )
           ],

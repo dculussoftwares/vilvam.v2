@@ -4,9 +4,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_3_demo/component/add_patient_form.dart';
 import 'package:material_3_demo/component/search_patient.dart';
+import 'package:material_3_demo/main.dart';
 
 import 'add_clinic.dart';
 import 'manage_clinic.dart';
@@ -244,8 +246,7 @@ class HealeeOptions extends StatelessWidget {
               ],
             ),
             body: const Column(
-              children: [
-                SearchPatient()],
+              children: [SearchPatient()],
             ),
           ),
         ),
@@ -437,40 +438,6 @@ class ClinicOptions extends StatelessWidget {
     );
   }
 
-  void openManageClinicFullscreenDialog(BuildContext context) {
-    showDialog<void>(
-      context: context,
-      builder: (context) => Dialog.fullscreen(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Scaffold(
-            appBar: AppBar(
-              title: const Text('Manage clinic'),
-              centerTitle: false,
-              leading: IconButton(
-                icon: const Icon(Icons.close),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-              actions: [
-                TextButton(
-                  child: const Text('Close'),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-              ],
-            ),
-            body: const Column(
-              children: [
-                Text("manage clinic"),
-                ManageClinic(),
-                // AddClinicForm()
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return ComponentDecoration(
@@ -537,8 +504,9 @@ class ClinicOptions extends StatelessWidget {
                           size: 34,
                         ),
                         onPressed: () {
+                          context.go("/manageClinicPage");
                           //openAddClinicFullscreenDialog(context);
-                          openManageClinicFullscreenDialog(context);
+                          // openManageClinicFullscreenDialog(context);
                         },
                       ),
                     ),
@@ -1864,8 +1832,6 @@ class _BottomSheetSectionState extends State<BottomSheetSection> {
     );
   }
 }
-
-
 
 class IconButtonAnchorExample extends StatelessWidget {
   const IconButtonAnchorExample({super.key});

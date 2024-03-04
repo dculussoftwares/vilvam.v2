@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:gap/gap.dart';
 import 'package:material_3_demo/component/page_wrapper.dart';
 import 'package:material_3_demo/component/screen.dart';
 import 'package:material_3_demo/main.dart';
@@ -21,7 +22,8 @@ class ShowConsultation extends StatelessWidget {
     return PageWrapper(
         child: Column(
       children: [
-        Text("All consultations"),
+        const Text("All consultations"),
+        Gap($styles.insets.sm),
         FutureBuilder<List<ClinicConsultation>>(
             future: future,
             builder: (_, snapshot) {
