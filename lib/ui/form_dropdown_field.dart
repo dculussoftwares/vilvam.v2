@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:material_3_demo/main.dart';
 
@@ -29,15 +27,13 @@ class FormFieldDropdown<T extends Object> extends StatelessWidget {
         child: Padding(
             padding: EdgeInsets.only(bottom: $styles.insets.sm),
             child: DropdownButtonFormField<T>(
-                style:
-                (darkBackground ?? false) ? TextStyle(color: Colors.white) : null,
+                style: (darkBackground ?? false)
+                    ? TextStyle(color: Colors.white)
+                    : null,
                 decoration: InputDecoration(
                   hintStyle: TextStyle(color: Colors.black),
-                  labelStyle: TextStyle(color: $styles.colors.accent1),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: (darkBackground ?? false)
-                        ? BorderSide(color: Colors.white, width: 0.0)
-                        : BorderSide(color: Colors.black, width: 0.0),
+                    borderSide: BorderSide(color: Colors.black, width: 0.0),
                   ),
                   border: OutlineInputBorder(),
                   labelText: labelName,

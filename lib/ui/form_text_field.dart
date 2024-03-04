@@ -31,18 +31,12 @@ class FormTextField extends StatelessWidget {
           inputFormatters: (showNumberKeyboardOnly ?? false)
               ? <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly]
               : [],
-          style:
-              (darkBackground ?? false) ? TextStyle(color: Colors.white) : null,
           onSaved: onSaved,
           decoration: InputDecoration(
-            hintStyle: TextStyle(color: Colors.black),
-            labelStyle: TextStyle(color: $styles.colors.accent1),
-            enabledBorder: OutlineInputBorder(
-              borderSide: (darkBackground ?? false)
-                  ? BorderSide(color: Colors.white, width: 0.0)
-                  : BorderSide(color: Colors.black, width: 0.0),
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.black, width: 0.0),
             ),
-            border: OutlineInputBorder(),
+            border: const OutlineInputBorder(),
             labelText: labelName,
           ),
           validator: (value) {

@@ -13,14 +13,14 @@ class DataRepository {
   Future<Database> initializedDB() async {
     String path = await getDatabasesPath();
     return openDatabase(
-      join(path, 'patients7.db'),
+      join(path, 'patients8.db'),
       version: 1,
       onCreate: (Database db, int version) async {
         await db.execute(
           'CREATE TABLE $PATIENTS_TABLE(id TEXT PRIMARY KEY , name TEXT NOT NULL,age INTEGER NOT NULL,address TEXT NOT NULL,gender TEXT NOT NULL,createdTime INTEGER NOT NULL,phoneNumber INTEGER NOT NULL)',
         );
         await db.execute(
-          'CREATE TABLE $CONSULTATION_TABLE(id TEXT PRIMARY KEY ,notes TEXT NOT NULL,patientId INTEGER NOT NULL,createdTime INTEGER NOT NULL)',
+          'CREATE TABLE $CONSULTATION_TABLE(id TEXT PRIMARY KEY ,notes TEXT NOT NULL,patientId INTEGER NOT NULL,createdTime INTEGER NOT NULL, clinicId TEXT NOT NULL)',
         );
         await db.execute(
           'CREATE TABLE $CLINIC_TABLE(id TEXT PRIMARY KEY , name TEXT NOT NULL, location TEXT NOT NULL, isEnabled INTEGER NOT NULL)',
@@ -65,6 +65,13 @@ class DataRepository {
   Future<List<ClinicDetail>> getAllClinic() async {
     final Database db = await initializedDB();
     final List<Map<String, Object?>> queryResult = await db.query(CLINIC_TABLE);
+    return queryResult.map((e) => ClinicDetail.fromMap(e)).toList();
+  }
+
+  Future<List<ClinicDetail>> getAllActiveClinic() async {
+    final Database db = await initializedDB();
+    final List<Map<String, Object?>> queryResult =
+        await db.query(CLINIC_TABLE, where: 'isEnabled = ?', whereArgs: [1]);
     return queryResult.map((e) => ClinicDetail.fromMap(e)).toList();
   }
 
