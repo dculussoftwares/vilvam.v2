@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:material_3_demo/component/page_wrapper.dart';
 import 'package:material_3_demo/main.dart';
 import 'package:material_3_demo/modal/Consultation.dart';
+import 'package:material_3_demo/modal/PatientConsultation.dart';
 import 'package:material_3_demo/ui/failed_to_fetch.dart';
 
 import '../ui/app_loading_indicator.dart';
@@ -15,14 +16,13 @@ class ShowConsultation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late final _future =
-        dataRepository.getAllConsultationByPatientId(patientId);
+    late final future = dataRepository.getAllConsultationByPatientId(patientId);
     return PageWrapper(
         child: Column(
       children: [
         Text("All consultations"),
-        FutureBuilder<List<Consultation>>(
-            future: _future,
+        FutureBuilder<List<ClinicConsultation>>(
+            future: future,
             builder: (_, snapshot) {
               final consultation = snapshot.data;
 
@@ -40,7 +40,8 @@ class ShowConsultation extends StatelessWidget {
                       final delay = 100.ms + (100 * consultation!.length).ms;
                       final patient = consultation.elementAt(index);
                       return ConsultationDetail(
-                              consultation: patient, darkMode: true)
+                              consultation: patient.consultation,
+                              darkMode: true)
                           .animate()
                           .fade(delay: delay, duration: $styles.times.med * 1.5)
                           .slide(

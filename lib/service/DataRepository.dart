@@ -1,5 +1,6 @@
 import 'package:material_3_demo/modal/ClinicDetail.dart';
 import 'package:material_3_demo/modal/Consultation.dart';
+import 'package:material_3_demo/modal/PatientConsultation.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -13,7 +14,7 @@ class DataRepository {
   Future<Database> initializedDB() async {
     String path = await getDatabasesPath();
     return openDatabase(
-      join(path, 'patients8.db'),
+      join(path, 'patients9.db'),
       version: 1,
       onCreate: (Database db, int version) async {
         await db.execute(
@@ -122,12 +123,29 @@ class DataRepository {
     return result;
   }
 
-  Future<List<Consultation>> getAllConsultationByPatientId(String id) async {
+  Future<List<ClinicConsultation>> getAllConsultationByPatientId(
+      String id) async {
     final Database db = await initializedDB();
     List<Map<String, dynamic>> allRows = await db.query(CONSULTATION_TABLE,
         where: 'patientId=?', whereArgs: [id], orderBy: 'createdTime DESC');
     List<Consultation> consultations =
         allRows.map((contact) => Consultation.fromMap(contact)).toList();
-    return consultations;
+
+    List<ClinicDetail> allClinics = await getAllClinic();
+    List<ClinicConsultation> clinicConsultation = [];
+
+    for (var consultation in consultations) {
+      var clinicDetail =
+          allClinics.where((element) => element.id == consultation.id).first;
+      clinicConsultation.add(ClinicConsultation(
+          consultation: consultation, clinicDetails: clinicDetail));
+    }
+
+    // consultations.map((consultation) => {
+    // ClinicDetail clinicDetail=allClinics.where((element) => element.id == consultation.id).first();
+    //     patientConsultation.add(ClinicConsultation(consultation: consultation,
+    //     clinicDetails: clinicDetails))}
+    // );
+    return clinicConsultation;
   }
 }
