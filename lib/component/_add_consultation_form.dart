@@ -73,8 +73,8 @@ class _AddConsultationFormState extends State<AddConsultationForm> {
             } else if (!snapshot.hasData) {
               content = const Center(child: AppLoadingIndicator());
             } else {
-              ClinicDetail? genderDropdownValue = clinics?.first;
-
+              ClinicDetail? clinicDropdownInitialValue = clinics?.first;
+              clinicId = clinicDropdownInitialValue?.id;
               content = Form(
                   key: _formKey,
                   child: Column(
@@ -91,12 +91,13 @@ class _AddConsultationFormState extends State<AddConsultationForm> {
                           .animate(interval: 100.ms)
                           .fadeIn(delay: 600.ms, duration: $styles.times.med)
                           .slide(begin: Offset(0.2, 0), curve: Curves.easeOut),
+
                       FormFieldDropdown<ClinicDetail>(
                         onChanged: (ClinicDetail? value) {
                           clinicId = value?.id;
                         },
                         labelName: "Clinic",
-                        initialValue: genderDropdownValue,
+                        initialValue: clinicDropdownInitialValue,
                         validator: (value) {
                           if (value == null) {
                             return "Clinic is required";
@@ -104,10 +105,10 @@ class _AddConsultationFormState extends State<AddConsultationForm> {
                           return null;
                         },
                         options: clinics?.map<DropdownMenuItem<ClinicDetail>>(
-                            (ClinicDetail gender) {
+                            (ClinicDetail clinicDetail) {
                           return DropdownMenuItem<ClinicDetail>(
-                            value: gender,
-                            child: Text(gender.name),
+                            value: clinicDetail,
+                            child: Text(clinicDetail.name),
                           );
                         }).toList(),
                       ),

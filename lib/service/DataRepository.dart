@@ -14,7 +14,7 @@ class DataRepository {
   Future<Database> initializedDB() async {
     String path = await getDatabasesPath();
     return openDatabase(
-      join(path, 'patients9.db'),
+      join(path, 'patients12.db'),
       version: 1,
       onCreate: (Database db, int version) async {
         await db.execute(
@@ -136,7 +136,7 @@ class DataRepository {
 
     for (var consultation in consultations) {
       var clinicDetail =
-          allClinics.where((element) => element.id == consultation.id).first;
+          allClinics.where((element) => element.id == consultation.clinicId).first;
       clinicConsultation.add(ClinicConsultation(
           consultation: consultation, clinicDetails: clinicDetail));
     }
