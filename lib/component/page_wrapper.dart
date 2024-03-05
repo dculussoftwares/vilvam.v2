@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class PageWrapper extends StatelessWidget {
   PageWrapper({super.key, required this.child});
@@ -25,7 +26,7 @@ class PageWrapper extends StatelessWidget {
                     children: [
                       IconButton(
                         icon: const Icon(size: 34, Icons.chevron_left_outlined),
-                        onPressed: () => Navigator.of(context).pop(),
+                        onPressed: () => {Navigator.pop(context)},
                       ),
                       ...[child]
                     ],

@@ -115,7 +115,7 @@ class _AddConsultationFormState extends State<AddConsultationForm> {
                       Center(
                         child: AppBtn.from(
                           expand: true,
-                          text: "Add new patient",
+                          text: "Add new consultation",
                           onPressed: () =>
                               _handleOnConsultationAdd(context, _formKey),
                         ).animate().fadeIn(delay: t).move(

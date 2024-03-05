@@ -314,7 +314,7 @@ class HealeeOptions extends StatelessWidget {
                           size: 34,
                         ),
                         onPressed: () {
-                          context.go("/searchPatientPage");
+                          GoRouter.of(context).push("/searchPatientPage");
                           // openSearchPatientFullscreenDialog(context);
                         },
                       ),
@@ -351,7 +351,7 @@ class HealeeOptions extends StatelessWidget {
                           size: 34,
                         ),
                         onPressed: () {
-                          context.go("/addPatientPage");
+                          GoRouter.of(context).push("/addPatientPage");
                           // openAddPatientFullscreenDialog(context);
                         },
                       ),
@@ -469,7 +469,7 @@ class ClinicOptions extends StatelessWidget {
                           size: 34,
                         ),
                         onPressed: () {
-                          context.go("/addClinicPage");
+                          GoRouter.of(context).push("/addClinicPage");
                           // openAddClinicFullscreenDialog(context);
                         },
                       ),
@@ -506,7 +506,7 @@ class ClinicOptions extends StatelessWidget {
                           size: 34,
                         ),
                         onPressed: () {
-                          context.go("/manageClinicPage");
+                          GoRouter.of(context).push("/manageClinicPage");
                           //openAddClinicFullscreenDialog(context);
                           // openManageClinicFullscreenDialog(context);
                         },

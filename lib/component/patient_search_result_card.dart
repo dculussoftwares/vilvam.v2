@@ -15,7 +15,7 @@ class PatientSearchResultCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         var patientId = patients?.id ?? "";
-        context.go("/patientDetailPage/${patientId}");
+        GoRouter.of(context).push("/patientDetailPage/${patientId}");
         // openPatientDetailFullscreenDialog(context, patients!.id);
         // context.push(ScreenPaths.patient(patients!.id));
       },
