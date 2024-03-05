@@ -256,6 +256,8 @@ class _AppState extends State<App> {
     );
 
     return MaterialApp.router(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,
       title: 'Material 3',
       themeMode: themeMode,
