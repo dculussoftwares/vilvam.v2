@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+
+import '../main.dart';
 
 class PageWrapper extends StatelessWidget {
   PageWrapper({super.key, required this.child});
@@ -24,10 +27,21 @@ class PageWrapper extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      IconButton(
-                        icon: const Icon(size: 34, Icons.chevron_left_outlined),
-                        onPressed: () => {Navigator.pop(context)},
+                      Gap($styles.insets.sm),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          OutlinedButton.icon(
+                            label: const Text('Back'),
+                            icon: const Icon(
+                              Icons.chevron_left_sharp,
+                              size: 24.0,
+                            ),
+                            onPressed: () => {Navigator.pop(context)},
+                          ),
+                        ],
                       ),
+                      Gap($styles.insets.sm),
                       ...[child]
                     ],
                   ),
