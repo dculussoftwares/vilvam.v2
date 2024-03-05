@@ -351,7 +351,8 @@ class HealeeOptions extends StatelessWidget {
                           size: 34,
                         ),
                         onPressed: () {
-                          openAddPatientFullscreenDialog(context);
+                          context.go("/addPatientPage");
+                          // openAddPatientFullscreenDialog(context);
                         },
                       ),
                     ),
@@ -468,7 +469,8 @@ class ClinicOptions extends StatelessWidget {
                           size: 34,
                         ),
                         onPressed: () {
-                          openAddClinicFullscreenDialog(context);
+                          context.go("/addClinicPage");
+                          // openAddClinicFullscreenDialog(context);
                         },
                       ),
                     ),

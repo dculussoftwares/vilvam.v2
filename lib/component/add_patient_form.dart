@@ -42,23 +42,6 @@ class _AddPatientFormState extends State<AddPatientForm> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Gap($styles.insets.xl),
-        Text(
-          'OMMM',
-          style: $styles.text.titleFont.copyWith(color: $styles.colors.accent1),
-        ).animate().fade(delay: 150.ms, duration: 600.ms),
-        Gap($styles.insets.xs),
-        Semantics(
-          header: true,
-          child: Text(
-            "SSSIVVAAMMAMAMA",
-            textAlign: TextAlign.center,
-            style: $styles.text.h2
-                .copyWith(color: $styles.colors.offWhite, height: 1.2),
-            maxLines: 5,
-            overflow: TextOverflow.ellipsis,
-          ).animate().fade(delay: 250.ms, duration: 600.ms),
-        ),
         Gap($styles.insets.lg),
         Form(
             key: _formKey,
