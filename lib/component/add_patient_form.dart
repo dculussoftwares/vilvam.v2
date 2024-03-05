@@ -13,7 +13,10 @@ import 'package:uuid/uuid.dart';
 import '../main.dart';
 
 class AddPatientForm extends StatefulWidget {
-  const AddPatientForm({Key? key}) : super(key: key);
+  String? patientId;
+  bool? isEdit = false;
+
+  AddPatientForm({super.key, this.patientId, this.isEdit});
 
   @override
   State<AddPatientForm> createState() => _AddPatientFormState();

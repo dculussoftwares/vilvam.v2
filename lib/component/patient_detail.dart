@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_3_demo/component/_patient_action.dart';
 import 'package:material_3_demo/component/info_row.dart';
 import 'package:material_3_demo/component/total_consultation_widget.dart';
@@ -109,6 +110,15 @@ class PatientDetailTableColumn extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ...[
+                Center(
+                  child: TextButton.icon(
+                    onPressed: () {
+                      GoRouter.of(context).go("/patientDetailPage/$newPatientId");
+                    },
+                    icon: const Icon(Icons.edit),
+                    label: const Text('Edit'),
+                  ),
+                ),
                 InfoRow("Name", data!.name),
                 InfoRow("Address", data!.address),
                 InfoRow("Age", data!.age.toString()),

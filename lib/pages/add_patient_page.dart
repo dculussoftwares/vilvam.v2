@@ -5,16 +5,22 @@ import '../component/add_patient_form.dart';
 import '../component/patient_options.dart';
 
 class AddPatientPage extends StatelessWidget {
-  AddPatientPage({super.key});
+  String? patientId;
+  bool? isEdit = false;
 
-
+  AddPatientPage({super.key, this.patientId, this.isEdit});
 
   @override
   Widget build(BuildContext context) {
     return PageWrapper(
         child: ComponentGroupDecoration(
-          label: 'Add patient',
-          children: [AddPatientForm()],
-        ));
+      label: isEdit == true ? "Edit patient" : 'Add patient',
+      children: [
+        AddPatientForm(
+          patientId: patientId,
+          isEdit: isEdit,
+        )
+      ],
+    ));
   }
 }

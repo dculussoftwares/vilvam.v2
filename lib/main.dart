@@ -245,6 +245,16 @@ class _AppState extends State<App> {
               },
             ),
             GoRoute(
+              path: 'editPatientPage/:patientId',
+              builder: (BuildContext context, GoRouterState state) {
+                var patientId = state.pathParameters['patientId'] ?? "";
+                return AddPatientPage(
+                  patientId: patientId,
+                  isEdit: true,
+                );
+              },
+            ),
+            GoRoute(
               path: 'addClinicPage',
               builder: (BuildContext context, GoRouterState state) {
                 return AddClinicPage();
