@@ -54,12 +54,6 @@ class _PatientActionState extends State<PatientAction> {
                     isSecondary: true,
                     onPressed: () => {
                       GoRouter.of(context).push("/addConsultation/${widget.patientId}")
-                      // Navigator.pushNamed(context, '/addConsultation',
-                      //     arguments: {
-                      //       'patientId': widget.patientId,
-                      //     })
-                      // context.push(ScreenPaths.addConsultation(
-                      //     int.parse(widget.patientId)))
                     },
                   ).animate().fadeIn(delay: t).move(
                         begin: Offset(0, 50),

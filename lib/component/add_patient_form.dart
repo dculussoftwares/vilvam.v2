@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_3_demo/modal/Gender.dart';
 import 'package:material_3_demo/modal/Patients.dart';
 import 'package:material_3_demo/ui/buttons.dart';
@@ -115,29 +116,9 @@ class _AddPatientFormState extends State<AddPatientForm> {
                 ),
               ],
             )),
-        // Animate().toggle(
-        //     delay: 500.ms,
-        //     builder: (_, value, __) {
-        //       return CompassDivider(
-        //           isExpanded: !value, duration: $styles.times.med);
-        //     }),
         Gap($styles.insets.lg),
-        // AppBtn.from(
-        //   text: $strings.collectibleFoundButtonViewCollection,
-        //   isSecondary: true,
-        //   onPressed: () => _handleViewCollectionPressed(context),
-        // ).animate().fadeIn(delay: t).move(
-        //       begin: Offset(0, 50),
-        //       duration: t,
-        //       curve: Curves.easeOutCubic,
-        //     ),
       ],
     );
-  }
-
-  void _handleViewCollectionPressed(BuildContext context) {
-    // Navigator.pop(context);
-    // context.push(ScreenPaths.collection("collectible.id"));
   }
 
   Future<void> _handleOnPatientAdd(
@@ -150,8 +131,9 @@ class _AddPatientFormState extends State<AddPatientForm> {
       print('name ${name!}');
       print('address ${address!}');
       print('age ${age!}');
+      var newPatientId = uuid.v4().toString();
       await dataRepository.addPatient(Patients(
-          id: uuid.v4().toString(),
+          id: newPatientId,
           name: name!,
           age: int.parse(age!),
           phoneNumber: int.parse(phoneNumber!),
@@ -165,7 +147,7 @@ class _AddPatientFormState extends State<AddPatientForm> {
           description: const Text('Added patient successfully'),
           autoCloseDuration: const Duration(seconds: 3),
         );
-        Navigator.pop(context);
+        GoRouter.of(context).go("/patientDetailPage/$newPatientId");
       }
     }
     print("CLIKED+++");
