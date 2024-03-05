@@ -275,7 +275,7 @@ class HealeeOptions extends StatelessWidget {
                 ),
               ],
             ),
-            body: const Column(
+            body: Column(
               children: [Text("Add patients"), AddPatientForm()],
             ),
           ),

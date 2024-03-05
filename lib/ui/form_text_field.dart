@@ -7,6 +7,7 @@ class FormTextField extends StatelessWidget {
   String? validationMessage;
   bool? showNumberKeyboardOnly;
   String? labelName;
+  String? initialValue;
   bool? darkBackground;
   void Function(String?)? onSaved;
 
@@ -16,7 +17,8 @@ class FormTextField extends StatelessWidget {
       this.validationMessage,
       this.onSaved,
       this.darkBackground,
-      this.showNumberKeyboardOnly})
+      this.showNumberKeyboardOnly,
+      this.initialValue})
       : super(key: key);
 
   @override
@@ -25,6 +27,7 @@ class FormTextField extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.only(bottom: $styles.insets.sm),
         child: TextFormField(
+          initialValue: initialValue,
           keyboardType: (showNumberKeyboardOnly ?? false)
               ? TextInputType.number
               : TextInputType.text,

@@ -113,7 +113,7 @@ class PatientDetailTableColumn extends StatelessWidget {
                 Center(
                   child: TextButton.icon(
                     onPressed: () {
-                      GoRouter.of(context).go("/patientDetailPage/$newPatientId");
+                      GoRouter.of(context).go("/editPatientPage/${data!.id}");
                     },
                     icon: const Icon(Icons.edit),
                     label: const Text('Edit'),

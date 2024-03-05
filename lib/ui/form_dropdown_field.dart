@@ -27,6 +27,7 @@ class FormFieldDropdown<T extends Object> extends StatelessWidget {
         child: Padding(
             padding: EdgeInsets.only(bottom: $styles.insets.sm),
             child: DropdownButtonFormField<T>(
+
                 style: (darkBackground ?? false)
                     ? TextStyle(color: Colors.white)
                     : null,

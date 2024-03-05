@@ -43,6 +43,11 @@ class _AddPatientFormState extends State<AddPatientForm> {
       Gender(key: 'other_gender', value: "Other gender"),
     ];
     Gender genderDropdownValue = genderList.first;
+
+    if (widget.isEdit == true) {
+
+    }
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -54,6 +59,7 @@ class _AddPatientFormState extends State<AddPatientForm> {
               children: [
                 ...[
                   FormTextField(
+                      initialValue: name,
                       labelName: "Name",
                       validationMessage: "Name is required",
                       onSaved: (value) {
@@ -61,6 +67,7 @@ class _AddPatientFormState extends State<AddPatientForm> {
                         name = value;
                       }),
                   FormTextField(
+                      initialValue: age,
                       showNumberKeyboardOnly: true,
                       labelName: "Age",
                       validationMessage: "Age is required",
@@ -69,6 +76,7 @@ class _AddPatientFormState extends State<AddPatientForm> {
                         age = value;
                       }),
                   FormTextField(
+                      initialValue: phoneNumber,
                       showNumberKeyboardOnly: true,
                       labelName: "Phone number",
                       validationMessage: "Phone number is required",
@@ -96,6 +104,7 @@ class _AddPatientFormState extends State<AddPatientForm> {
                     }).toList(),
                   ),
                   FormTextField(
+                      initialValue: address,
                       labelName: "Address",
                       validationMessage: "Address is required",
                       onSaved: (value) {
