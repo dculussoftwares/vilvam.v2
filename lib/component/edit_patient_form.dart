@@ -50,14 +50,15 @@ class _EditPatientForm extends State<EditPatientForm> {
       future: _future,
       builder: (_, snapshot) {
         final data = snapshot.data;
-        Gender genderDropdownValue =
-            genderList.where((e) => e.key == data?.gender).first;
+
         late Widget content;
         if (snapshot.hasError || (snapshot.hasData && data == null)) {
           content = FailedToFetch();
         } else if (!snapshot.hasData) {
           content = const Center(child: AppLoadingIndicator());
         } else {
+          Gender genderDropdownValue =
+              genderList.where((e) => e.key == data?.gender).first;
           content = Flex(
             direction: Axis.horizontal,
             children: [
@@ -185,7 +186,7 @@ class _EditPatientForm extends State<EditPatientForm> {
           context: context,
           type: ToastificationType.success,
           title: const Text('Success!'),
-          description: const Text('Added patient successfully'),
+          description: const Text('Updated patient successfully'),
           autoCloseDuration: const Duration(seconds: 3),
         );
         GoRouter.of(context).go("/patientDetailPage/$newPatientId");
