@@ -135,8 +135,9 @@ class DataRepository {
     List<ClinicConsultation> clinicConsultation = [];
 
     for (var consultation in consultations) {
-      var clinicDetail =
-          allClinics.where((element) => element.id == consultation.clinicId).first;
+      var clinicDetail = allClinics
+          .where((element) => element.id == consultation.clinicId)
+          .first;
       clinicConsultation.add(ClinicConsultation(
           consultation: consultation, clinicDetails: clinicDetail));
     }
@@ -147,5 +148,12 @@ class DataRepository {
     //     clinicDetails: clinicDetails))}
     // );
     return clinicConsultation;
+  }
+
+  Future<Consultation?> getConsultationById(String id) async {
+    final Database db = await initializedDB();
+    var response =
+        await db.query(CONSULTATION_TABLE, where: 'id=?', whereArgs: [id]);
+    return response.isNotEmpty ? Consultation.fromMap(response.first) : null;
   }
 }

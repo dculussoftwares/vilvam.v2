@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_3_demo/component/add_consultation.dart';
+import 'package:material_3_demo/component/edit_consultation_form.dart';
 import 'package:material_3_demo/component/show_consultations.dart';
 import 'package:material_3_demo/modal/ClinicDetail.dart';
 import 'package:material_3_demo/pages/add_clinic_page.dart';
@@ -22,6 +23,7 @@ import 'package:sized_context/sized_context.dart';
 import 'package:uuid/uuid.dart';
 import 'package:web_startup_analyzer/web_startup_analyzer.dart';
 
+import 'component/edit_consultation.dart';
 import 'constants.dart';
 import 'home.dart';
 import 'modal/Patients.dart';
@@ -206,6 +208,14 @@ class _AppState extends State<App> {
                 return AddConsultation(
                   patientId: patientId,
                 );
+              },
+            ),
+            GoRoute(
+              path: 'editConsultation/:consultationId',
+              builder: (BuildContext context, GoRouterState state) {
+                var consultationId =
+                    state.pathParameters['consultationId'] ?? "";
+                return EditConsultation(consultationId: consultationId);
               },
             ),
             GoRoute(

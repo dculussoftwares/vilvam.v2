@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_3_demo/component/info_row.dart';
 import 'package:material_3_demo/component/themed_text.dart';
 import 'package:material_3_demo/main.dart';
@@ -40,6 +41,16 @@ class ConsultationDetail extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ...[
+                          Center(
+                            child: TextButton.icon(
+                              onPressed: () {
+                                GoRouter.of(context).go(
+                                    "/editPatientPage/${clinicConsultation.consultation.id}");
+                              },
+                              icon: const Icon(Icons.edit),
+                              label: const Text('Edit'),
+                            ),
+                          ),
                           InfoRow(
                               "Notes:", clinicConsultation.consultation.notes),
                           InfoRow("Clinic name:",
