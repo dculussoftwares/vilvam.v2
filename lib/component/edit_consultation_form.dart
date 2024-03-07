@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_3_demo/modal/Consultation.dart';
-import 'package:material_3_demo/modal/Gender.dart';
 import 'package:material_3_demo/ui/app_loading_indicator.dart';
 import 'package:material_3_demo/ui/buttons.dart';
 import 'package:material_3_demo/ui/failed_to_fetch.dart';
@@ -42,9 +41,8 @@ class _EditConsultationForm extends State<EditConsultationForm> {
         BuildContext context, GlobalKey<FormState> formKey) async {
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
-        var uuid = const Uuid();
         await dataRepository.addConsultation(Consultation(
-            id: uuid.v4().toString(),
+            id: widget.consultationId ?? '',
             notes: notes ?? '',
             patientId: patientId ?? '',
             clinicId: clinicId ?? ''));
@@ -66,16 +64,15 @@ class _EditConsultationForm extends State<EditConsultationForm> {
     return FutureBuilder(
       future: Future.wait([_consultationFuture, _activeClinicFuture]),
       builder: (_, AsyncSnapshot<List<dynamic>> snapshot) {
-        final consultationData = snapshot.data?[0] as Consultation;
-        final activeClinicsData = snapshot.data?[1] as List<ClinicDetail>;
-
         late Widget content;
         if (snapshot.hasError ||
-            (snapshot.hasData && consultationData == null)) {
+            (snapshot.hasData && snapshot.data?[0] as Consultation == null)) {
           content = FailedToFetch();
         } else if (!snapshot.hasData) {
           content = const Center(child: AppLoadingIndicator());
         } else {
+          final consultationData = snapshot.data?[0] as Consultation;
+          final activeClinicsData = snapshot.data?[1] as List<ClinicDetail>;
           ClinicDetail? clinicDropdownInitialValue = activeClinicsData
               .where((element) => element.id == consultationData.clinicId)
               .first;
@@ -122,7 +119,7 @@ class _EditConsultationForm extends State<EditConsultationForm> {
                   Center(
                     child: AppBtn.from(
                       expand: true,
-                      text: "Add new consultation",
+                      text: "Update consultation",
                       onPressed: () =>
                           _handleOnConsultationUpdate(context, _formKey),
                     ).animate().fadeIn(delay: t).move(
@@ -142,27 +139,3 @@ class _EditConsultationForm extends State<EditConsultationForm> {
     );
   }
 }
-// Future<void> _handleOnPatientAdd(
-//     BuildContext context, GlobalKey<FormState> formKey) async {
-//   print("CLIKED");
-//   if (_formKey.currentState!.validate()) {
-//     _formKey.currentState!.save();
-//     print("Validated");
-//     // print("Validated"+_formKey.currentState!.);
-//     print('name ${name!}');
-//     print('address ${address!}');
-//     print('age ${age!}');
-//     var newPatientId = uuid.v4().toString();
-//     await dataRepository.addPatient(Patients(
-//         id: newPatientId,
-//         name: name!,
-//         age: int.parse(age!),
-//         phoneNumber: int.parse(phoneNumber!),
-//         address: address!,
-//         gender: gender!));
-//   }
-//   print("CLIKED+++");
-
-// Navigator.of(context).pop();
-// Navigator.pop(context);
-// context.push(ScreenPaths.collection("collectible.id"));

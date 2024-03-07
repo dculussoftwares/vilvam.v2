@@ -44,8 +44,8 @@ class ConsultationDetail extends StatelessWidget {
                           Center(
                             child: TextButton.icon(
                               onPressed: () {
-                                GoRouter.of(context).go(
-                                    "/editPatientPage/${clinicConsultation.consultation.id}");
+                                GoRouter.of(context).push(
+                                    "/editConsultation/${clinicConsultation.consultation.id}");
                               },
                               icon: const Icon(Icons.edit),
                               label: const Text('Edit'),

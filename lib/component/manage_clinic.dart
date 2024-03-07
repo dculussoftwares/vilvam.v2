@@ -33,6 +33,7 @@ class _ManageClinicState extends State<ManageClinic> {
               content = const Center(child: AppLoadingIndicator());
             } else {
               content = ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: clinics?.length,
                   itemBuilder: (BuildContext context, int index) {

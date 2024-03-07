@@ -37,6 +37,7 @@ class ShowConsultation extends StatelessWidget {
                 content = const Center(child: AppLoadingIndicator());
               } else {
                 content = ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: clinicConsultations?.length,
                     itemBuilder: (BuildContext context, int index) {

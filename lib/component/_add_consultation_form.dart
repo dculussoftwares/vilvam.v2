@@ -90,7 +90,6 @@ class _AddConsultationFormState extends State<AddConsultationForm> {
                           .animate(interval: 100.ms)
                           .fadeIn(delay: 600.ms, duration: $styles.times.med)
                           .slide(begin: Offset(0.2, 0), curve: Curves.easeOut),
-
                       FormFieldDropdown<ClinicDetail>(
                         onChanged: (ClinicDetail? value) {
                           clinicId = value?.id;
@@ -125,21 +124,6 @@ class _AddConsultationFormState extends State<AddConsultationForm> {
                       )
                     ],
                   ));
-
-              // ListView.builder(
-              // shrinkWrap: true,
-              // itemCount: clinics?.length,
-              // itemBuilder: (BuildContext context, int index) {
-              //   final delay = 100.ms + (100 * clinics!.length).ms;
-              //   final patient = clinics.elementAt(index);
-              //   return ClinicDetailCard(
-              //           clinicDetails: clinics,
-              //           currentIndex: index,
-              //           darkMode: true)
-              //       .animate()
-              //       .fade(delay: delay, duration: $styles.times.med * 1.5)
-              //       .slide(begin: Offset(0, 1), curve: Curves.easeOutBack);
-              // });
             }
             return Stack(
               children: [content],
