@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_3_demo/main.dart';
 import 'package:material_3_demo/modal/ClinicDetail.dart';
 import 'package:material_3_demo/modal/Consultation.dart';
@@ -109,6 +110,18 @@ class _AddConsultationFormState extends State<AddConsultationForm> {
                             child: Text(clinicDetail.name),
                           );
                         }).toList(),
+                      ),
+                      Center(
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: TextButton.icon(
+                            onPressed: () {
+                              GoRouter.of(context).push("/addClinicPage");
+                            },
+                            icon: const Icon(Icons.add),
+                            label: const Text('Add new clinic'),
+                          ),
+                        ),
                       ),
                       Center(
                         child: AppBtn.from(

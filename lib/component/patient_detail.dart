@@ -113,12 +113,13 @@ class PatientDetailTableColumn extends StatelessWidget {
                 Center(
                   child: TextButton.icon(
                     onPressed: () {
-                      GoRouter.of(context).go("/editPatientPage/${data!.id}");
+                      GoRouter.of(context).push("/editPatientPage/${data!.id}");
                     },
                     icon: const Icon(Icons.edit),
                     label: const Text('Edit'),
                   ),
                 ),
+                Gap($styles.insets.lg),
                 InfoRow("Name", data!.name),
                 InfoRow("Address", data!.address),
                 InfoRow("Age", data!.age.toString()),

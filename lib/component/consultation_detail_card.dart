@@ -51,6 +51,7 @@ class ConsultationDetail extends StatelessWidget {
                               label: const Text('Edit'),
                             ),
                           ),
+                          Gap($styles.insets.lg),
                           InfoRow(
                               "Notes:", clinicConsultation.consultation.notes),
                           InfoRow("Clinic name:",
