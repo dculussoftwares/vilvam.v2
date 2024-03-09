@@ -7,6 +7,7 @@ import 'package:material_3_demo/component/info_row.dart';
 import 'package:material_3_demo/component/total_consultation_widget.dart';
 import 'package:material_3_demo/main.dart';
 import 'package:material_3_demo/modal/Patients.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../constants.dart';
 import '../ui/app_loading_indicator.dart';
@@ -23,6 +24,7 @@ class PatientDetailScreen extends StatefulWidget {
 class _PatientDetailScreenState extends State<PatientDetailScreen> {
   late final _future = dataRepository.getPatientById(widget.patientId);
 
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Patients?>(
@@ -36,13 +38,14 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
           content = const Center(child: AppLoadingIndicator());
         } else {
           // var xx = $strings.appModalsButtonCancel;
+
           content = Flex(
             direction: Axis.horizontal,
             children: [
               Expanded(
                   child: Column(
                 children: [
-                  // Text("zxbhx"),
+                  Text( "zx"),
                   PatientAction(patientId: widget.patientId),
                   PatientDetailTableColumn(data: data),
                   TotalConsultation(patientId: widget.patientId)

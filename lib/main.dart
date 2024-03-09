@@ -5,10 +5,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
+import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_3_demo/component/add_consultation.dart';
-import 'package:material_3_demo/component/edit_consultation_form.dart';
 import 'package:material_3_demo/component/show_consultations.dart';
 import 'package:material_3_demo/modal/ClinicDetail.dart';
 import 'package:material_3_demo/pages/add_clinic_page.dart';
@@ -27,10 +28,7 @@ import 'component/edit_consultation.dart';
 import 'constants.dart';
 import 'home.dart';
 import 'modal/Patients.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'pages/manage_clinic_page.dart';
-import 'package:get_it_mixin/get_it_mixin.dart';
 
 var uuid = const Uuid();
 

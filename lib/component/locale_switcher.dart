@@ -3,6 +3,7 @@ import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:material_3_demo/main.dart';
 import 'package:material_3_demo/service/settings_logic.dart';
 import 'package:material_3_demo/ui/buttons.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LocaleSwitcher extends StatelessWidget with GetItMixin {
   LocaleSwitcher({Key? key}) : super(key: key);
@@ -15,9 +16,15 @@ class LocaleSwitcher extends StatelessWidget with GetItMixin {
       await settingsLogic.changeLocale(newLocale);
     }
 
-    return AppBtn.from(
-        text:"localeSwapButton",
-        onPressed: handleSwapLocale,
-        padding: EdgeInsets.all($styles.insets.sm));
+    var xxx = AppLocalizations.of(context)?.add_new_patient ?? "";
+    return Column(
+      children: [
+        Text("data" + xxx),
+        AppBtn.from(
+            text: "localeSwapButton",
+            onPressed: handleSwapLocale,
+            padding: EdgeInsets.all($styles.insets.sm)),
+      ],
+    );
   }
 }
