@@ -30,6 +30,7 @@ import 'modal/Patients.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'pages/manage_clinic_page.dart';
+import 'package:get_it_mixin/get_it_mixin.dart';
 
 var uuid = const Uuid();
 
@@ -104,7 +105,7 @@ void main() async {
   });
   registerSingletons();
   runApp(
-    const App(),
+    EntryPoint(),
   );
   await dataRepository.initializedDB().whenComplete(() async {
     await addPatients();
@@ -114,14 +115,26 @@ void main() async {
   });
 }
 
-void registerSingletons() {
-  GetIt.I.registerLazySingleton<DataRepository>(() => DataRepository());
-  GetIt.I.registerLazySingleton<LocaleLogic>(() => LocaleLogic());
-  GetIt.I.registerLazySingleton<SettingsLogic>(() => SettingsLogic());
+class EntryPoint extends StatelessWidget with GetItMixin {
+  EntryPoint({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final locale = watchX((SettingsLogic s) => s.currentLocale);
+    return App(locale: locale);
+  }
 }
 
-class App extends StatefulWidget {
-  const App({super.key});
+void registerSingletons() {
+  GetIt.I.registerLazySingleton<DataRepository>(() => DataRepository());
+  GetIt.I.registerLazySingleton<SettingsLogic>(() => SettingsLogic());
+  GetIt.I.registerLazySingleton<LocaleLogic>(() => LocaleLogic());
+}
+
+class App extends StatefulWidget with GetItStatefulWidgetMixin {
+  String? locale;
+
+  App({super.key, required this.locale});
 
   @override
   State<App> createState() => _AppState();
@@ -276,6 +289,7 @@ class _AppState extends State<App> {
     );
 
     return MaterialApp.router(
+      locale: widget.locale == null ? null : Locale(widget.locale ?? ''),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,

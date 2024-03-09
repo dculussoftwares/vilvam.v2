@@ -35,12 +35,14 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
         } else if (!snapshot.hasData) {
           content = const Center(child: AppLoadingIndicator());
         } else {
+          // var xx = $strings.appModalsButtonCancel;
           content = Flex(
             direction: Axis.horizontal,
             children: [
               Expanded(
                   child: Column(
                 children: [
+                  // Text("zxbhx"),
                   PatientAction(patientId: widget.patientId),
                   PatientDetailTableColumn(data: data),
                   TotalConsultation(patientId: widget.patientId)

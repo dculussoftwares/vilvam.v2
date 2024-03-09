@@ -4,14 +4,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_3_demo/component/add_patient_form.dart';
+import 'package:material_3_demo/component/locale_switcher.dart';
 import 'package:material_3_demo/component/search_patient.dart';
-import 'package:material_3_demo/main.dart';
 
 import 'add_clinic.dart';
-import 'manage_clinic.dart';
 
 const rowDivider = SizedBox(width: 20);
 const colDivider = SizedBox(height: 10);
@@ -25,9 +23,10 @@ class PatientOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ComponentGroupDecoration(
+    return ComponentGroupDecoration(
         label: 'Patient Options',
         children: <Widget>[
+          LocaleSwitcher(),
           HealeeOptions(),
           ClinicOptions(),
           DataExportOptions(),
