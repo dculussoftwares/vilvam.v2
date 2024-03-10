@@ -23,7 +23,7 @@ class EditConsultationForm extends StatefulWidget {
 }
 
 class _EditConsultationForm extends State<EditConsultationForm> {
-  final _formKey = GlobalKey<FormState>();
+  static final  _formKey = GlobalKey<FormState>();
   String? notes;
   String? patientId;
   String? clinicId;

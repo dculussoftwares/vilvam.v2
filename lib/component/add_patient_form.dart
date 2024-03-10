@@ -23,7 +23,7 @@ class AddPatientForm extends StatefulWidget {
 }
 
 class _AddPatientFormState extends State<AddPatientForm> {
-  final _formKey = GlobalKey<FormState>();
+  static final _formKey = GlobalKey<FormState>();
   String? name;
   String? age;
   String? phoneNumber;

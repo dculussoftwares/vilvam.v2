@@ -15,7 +15,7 @@ const smallSpacing = 10.0;
 const double cardWidth = 115;
 const double widthConstraint = 450;
 
-class FirstComponentList extends StatelessWidget {
+class FirstComponentList extends StatefulWidget {
   const FirstComponentList({
     super.key,
     required this.showNavBottomBar,
@@ -28,6 +28,11 @@ class FirstComponentList extends StatelessWidget {
   final bool showSecondList;
 
   @override
+  State<FirstComponentList> createState() => _FirstComponentListState();
+}
+
+class _FirstComponentListState extends State<FirstComponentList> {
+  @override
   Widget build(BuildContext context) {
     List<Widget> children = [
       const PatientOptions(),
@@ -37,9 +42,9 @@ class FirstComponentList extends StatelessWidget {
       const Communication(),
       colDivider,
       const Containment(),
-      if (!showSecondList) ...[
+      if (!widget.showSecondList) ...[
         colDivider,
-        Navigation(scaffoldKey: scaffoldKey),
+        Navigation(scaffoldKey: widget.scaffoldKey),
         colDivider,
         const Selection(),
         colDivider,
@@ -53,7 +58,7 @@ class FirstComponentList extends StatelessWidget {
       child: CustomScrollView(
         slivers: [
           SliverPadding(
-            padding: showSecondList
+            padding: widget.showSecondList
                 ? const EdgeInsetsDirectional.only(end: smallSpacing)
                 : EdgeInsets.zero,
             sliver: SliverList(
@@ -75,7 +80,7 @@ class FirstComponentList extends StatelessWidget {
   }
 }
 
-class SecondComponentList extends StatelessWidget {
+class SecondComponentList extends StatefulWidget {
   const SecondComponentList({
     super.key,
     required this.scaffoldKey,
@@ -84,9 +89,14 @@ class SecondComponentList extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
 
   @override
+  State<SecondComponentList> createState() => _SecondComponentListState();
+}
+
+class _SecondComponentListState extends State<SecondComponentList> {
+  @override
   Widget build(BuildContext context) {
     List<Widget> children = [
-      Navigation(scaffoldKey: scaffoldKey),
+      Navigation(scaffoldKey: widget.scaffoldKey),
       colDivider,
       const Selection(),
       colDivider,
@@ -257,11 +267,16 @@ class Containment extends StatelessWidget {
   }
 }
 
-class Navigation extends StatelessWidget {
+class Navigation extends StatefulWidget {
   const Navigation({super.key, required this.scaffoldKey});
 
   final GlobalKey<ScaffoldState> scaffoldKey;
 
+  @override
+  State<Navigation> createState() => _NavigationState();
+}
+
+class _NavigationState extends State<Navigation> {
   @override
   Widget build(BuildContext context) {
     return ComponentGroupDecoration(label: 'Navigation', children: [
@@ -270,7 +285,7 @@ class Navigation extends StatelessWidget {
         selectedIndex: 0,
         isExampleBar: true,
       ),
-      NavigationDrawers(scaffoldKey: scaffoldKey),
+      NavigationDrawers(scaffoldKey: widget.scaffoldKey),
       const Tabs(),
       const SearchAnchors(),
       const TopAppBars(),
@@ -1847,11 +1862,16 @@ class ButtonAnchorExample extends StatelessWidget {
   }
 }
 
-class NavigationDrawers extends StatelessWidget {
+class NavigationDrawers extends StatefulWidget {
   const NavigationDrawers({super.key, required this.scaffoldKey});
 
   final GlobalKey<ScaffoldState> scaffoldKey;
 
+  @override
+  State<NavigationDrawers> createState() => _NavigationDrawersState();
+}
+
+class _NavigationDrawersState extends State<NavigationDrawers> {
   @override
   Widget build(BuildContext context) {
     return ComponentDecoration(
@@ -1867,7 +1887,7 @@ class NavigationDrawers extends StatelessWidget {
             child: const Text('Show modal navigation drawer',
                 style: TextStyle(fontWeight: FontWeight.bold)),
             onPressed: () {
-              scaffoldKey.currentState!.openEndDrawer();
+              widget.scaffoldKey.currentState!.openEndDrawer();
             },
           ),
         ],

@@ -1924,11 +1924,16 @@ class ButtonAnchorExample extends StatelessWidget {
   }
 }
 
-class NavigationDrawers extends StatelessWidget {
+class NavigationDrawers extends StatefulWidget {
   const NavigationDrawers({super.key, required this.scaffoldKey});
 
   final GlobalKey<ScaffoldState> scaffoldKey;
 
+  @override
+  State<NavigationDrawers> createState() => _NavigationDrawersState();
+}
+
+class _NavigationDrawersState extends State<NavigationDrawers> {
   @override
   Widget build(BuildContext context) {
     return ComponentDecoration(
@@ -1944,7 +1949,7 @@ class NavigationDrawers extends StatelessWidget {
             child: const Text('Show modal navigation drawer',
                 style: TextStyle(fontWeight: FontWeight.bold)),
             onPressed: () {
-              scaffoldKey.currentState!.openEndDrawer();
+              widget.scaffoldKey.currentState!.openEndDrawer();
             },
           ),
         ],

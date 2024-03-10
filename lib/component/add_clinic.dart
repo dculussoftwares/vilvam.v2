@@ -18,7 +18,7 @@ class AddClinicForm extends StatefulWidget {
 
 class _AddClinicFormState extends State<AddClinicForm> {
   var uuid = const Uuid();
-  final _formKey = GlobalKey<FormState>();
+  static final _formKey = GlobalKey<FormState>();
   String? name;
   String? location;
   Duration t = $styles.times.med;

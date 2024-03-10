@@ -27,7 +27,7 @@ class AddConsultationForm extends StatefulWidget {
 }
 
 class _AddConsultationFormState extends State<AddConsultationForm> {
-  final _formKey = GlobalKey<FormState>();
+  static final _formKey = GlobalKey<FormState>();
   String? notes;
   String? clinicId;
 
