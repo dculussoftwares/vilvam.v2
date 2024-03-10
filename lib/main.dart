@@ -14,6 +14,7 @@ import 'package:material_3_demo/component/show_consultations.dart';
 import 'package:material_3_demo/modal/ClinicDetail.dart';
 import 'package:material_3_demo/pages/add_clinic_page.dart';
 import 'package:material_3_demo/pages/add_patient_page.dart';
+import 'package:material_3_demo/pages/export_data_page.dart';
 import 'package:material_3_demo/pages/patient_detail_page.dart';
 import 'package:material_3_demo/pages/search_patients_page.dart';
 import 'package:material_3_demo/service/DataRepository.dart';
@@ -279,6 +280,12 @@ class _AppState extends State<App> {
               path: 'addClinicPage',
               builder: (BuildContext context, GoRouterState state) {
                 return AddClinicPage();
+              },
+            ),
+            GoRoute(
+              path: 'exportDataPage',
+              builder: (BuildContext context, GoRouterState state) {
+                return ExportDataPage();
               },
             )
           ],

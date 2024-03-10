@@ -627,7 +627,9 @@ class DataExportOptions extends StatelessWidget {
                           Icons.cloud_upload_outlined,
                           size: 34,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          GoRouter.of(context).push("/exportDataPage");
+                        },
                       ),
                     ),
                     const SizedBox(height: 5),
