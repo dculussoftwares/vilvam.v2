@@ -8,6 +8,7 @@ import 'package:material_3_demo/component/page_wrapper.dart';
 import 'package:material_3_demo/main.dart';
 import 'package:material_3_demo/ui/buttons.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../component/add_patient_form.dart';
 import '../component/patient_options.dart';
@@ -39,23 +40,33 @@ class ExportDataPage extends StatelessWidget {
 
       sheetObject
           .cell(
-              CellIndex.indexByString(clinicNameColumnName + index.toString()))
+          CellIndex.indexByString(clinicNameColumnName + index.toString()))
           .value = TextCellValue(clinic.name);
       sheetObject
           .cell(CellIndex.indexByString(
-              clinicLocationColumnName + index.toString()))
+          clinicLocationColumnName + index.toString()))
           .value = TextCellValue(clinic.location);
       sheetObject
           .cell(CellIndex.indexByString(
-              clinicStatusColumnName + index.toString()))
+          clinicStatusColumnName + index.toString()))
           .value = BoolCellValue(clinic.isEnabled);
     }
 
     var fileBytes = excel.save();
     var directory = await getApplicationDocumentsDirectory();
-    File('$directory/export.xlsx')
+    var pathh = '${directory.path}/export.xlsx';
+
+    File(pathh)
       ..createSync(recursive: true)
       ..writeAsBytesSync(fileBytes!);
+
+
+    final result =
+    await Share.shareXFiles([XFile(pathh)], text: 'Great picture');
+
+    if (result.status == ShareResultStatus.success) {
+    print('Thank you for sharing the picture!');
+    }
     // File(join('output_file_name.xlsx'))
   }
 
@@ -63,23 +74,23 @@ class ExportDataPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return PageWrapper(
         child: ComponentGroupDecoration(
-      label: 'Export Data ',
-      children: [
-        Column(
+          label: 'Export Data ',
           children: [
-            AppBtn.from(
-              text: "Export",
-              onPressed: () {
-                onGenerateReport();
-              },
-            ).animate().fadeIn(delay: t).move(
+            Column(
+              children: [
+                AppBtn.from(
+                  text: "Export",
+                  onPressed: () {
+                    onGenerateReport();
+                  },
+                ).animate().fadeIn(delay: t).move(
                   begin: const Offset(0, 50),
                   duration: t,
                   curve: Curves.easeOutCubic,
                 )
+              ],
+            )
           ],
-        )
-      ],
-    ));
+        ));
   }
 }
