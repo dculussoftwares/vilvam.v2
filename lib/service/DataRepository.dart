@@ -115,6 +115,13 @@ class DataRepository {
     return patients;
   }
 
+  Future<List<Patients>> getAllPatients() async {
+    final Database db = await initializedDB();
+    final List<Map<String, Object?>> queryResult =
+        await db.query(PATIENTS_TABLE);
+    return queryResult.map((e) => Patients.fromMap(e)).toList();
+  }
+
   Future<int> addConsultation(Consultation consultation) async {
     int result = 0;
     final Database db = await initializedDB();
