@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:excel/excel.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:material_3_demo/modal/ClinicDetail.dart';
 import 'package:material_3_demo/modal/Patients.dart';
 import 'package:path_provider/path_provider.dart';
@@ -10,6 +11,24 @@ import '../constants.dart';
 import '../main.dart';
 
 class DataExportService {
+  var patientIdColumnName = 'A';
+  var patientNameColumnName = 'B';
+  var patientAgeColumnName = 'C';
+  var patientAddressColumnName = 'D';
+  var patientGenderColumnName = 'E';
+  var patientPhoneNumberColumnName = 'F';
+  var patientCreatedColumnName = 'G';
+  var clinicIdColumnName = 'A';
+  var clinicNameColumnName = 'B';
+  var clinicLocationColumnName = 'C';
+  var clinicStatusColumnName = 'D';
+  var clinicCreatedColumnName = 'E';
+  var consultationIdColumnName = 'A';
+  var consultationNotesColumnName = 'B';
+  var consultationPatientIdColumnName = 'C';
+  var consultationClinicIdColumnName = 'D';
+  var consultationCreatedColumnName = 'E';
+
   Future exportAllDataAsExcel() async {
     var excel = Excel.createExcel();
     Sheet sheetObject = excel[clinicsSheet];
@@ -43,13 +62,6 @@ class DataExportService {
   Future<void> generatePatientExcel(Sheet sheetObject) async {
     var allPatients = await dataRepository.getAllPatients();
     int index = 1;
-    var patientIdColumnName = 'A';
-    var patientNameColumnName = 'B';
-    var patientAgeColumnName = 'C';
-    var patientAddressColumnName = 'D';
-    var patientGenderColumnName = 'E';
-    var patientPhoneNumberColumnName = 'F';
-    var patientCreatedColumnName = 'G';
 
     sheetObject
         .cell(CellIndex.indexByString(patientIdColumnName + index.toString()))
@@ -120,11 +132,6 @@ class DataExportService {
   Future generateClinicExcel(Sheet sheetObject) async {
     var allClinics = await dataRepository.getAllClinic();
     int index = 1;
-    var clinicIdColumnName = 'A';
-    var clinicNameColumnName = 'B';
-    var clinicLocationColumnName = 'C';
-    var clinicStatusColumnName = 'D';
-    var clinicCreatedColumnName = 'E';
 
     sheetObject
         .cell(CellIndex.indexByString(clinicIdColumnName + index.toString()))
@@ -177,11 +184,6 @@ class DataExportService {
   Future generateConsultationSheetExcel(Sheet sheetObject) async {
     var allConsultation = await dataRepository.getAllConsultation();
     int index = 1;
-    var consultationIdColumnName = 'A';
-    var consultationNotesColumnName = 'B';
-    var consultationPatientIdColumnName = 'C';
-    var consultationClinicIdColumnName = 'D';
-    var consultationCreatedColumnName = 'E';
 
     sheetObject
         .cell(CellIndex.indexByString(
@@ -233,6 +235,37 @@ class DataExportService {
           TextCellValue(
               DateTime.fromMillisecondsSinceEpoch(consultation.createdTime)
                   .toString());
+    }
+  }
+
+  Future importDataFromExcel() async {
+    FilePickerResult? pickedFile = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['xlsx'],
+      allowMultiple: false,
+    );
+    if (pickedFile != null && pickedFile.files.single.path != null) {
+      var bytes = File(pickedFile.files.single.path ?? "").readAsBytesSync();
+      var excel = Excel.decodeBytes(bytes as List<int>);
+      if (excel.tables[clinicsSheet] != null) {
+        await importClinic(excel.tables[clinicsSheet]!);
+      }
+    }
+  }
+
+  Future importClinic(Sheet clinicSheet) async {
+    for (var row in clinicSheet.rows) {
+      // row.
+      for (var cell in row) {
+
+        print('cell ${cell?.rowIndex}/${cell?.columnIndex}');
+        final value = cell?.value;
+        print(value);
+
+        if (cell?.rowIndex != 0) {
+
+        }
+      }
     }
   }
 }

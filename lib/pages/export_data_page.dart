@@ -16,6 +16,11 @@ class ExportDataPage extends StatelessWidget {
     // File(join('output_file_name.xlsx'))
   }
 
+  Future<void> onImportReport() async {
+    await dataExportService.importDataFromExcel();
+    // File(join('output_file_name.xlsx'))
+  }
+
   @override
   Widget build(BuildContext context) {
     return PageWrapper(
@@ -28,6 +33,16 @@ class ExportDataPage extends StatelessWidget {
               text: "Export",
               onPressed: () {
                 onGenerateReport();
+              },
+            ).animate().fadeIn(delay: t).move(
+                  begin: const Offset(0, 50),
+                  duration: t,
+                  curve: Curves.easeOutCubic,
+                ),
+            AppBtn.from(
+              text: "Import",
+              onPressed: () {
+                onImportReport();
               },
             ).animate().fadeIn(delay: t).move(
                   begin: const Offset(0, 50),
