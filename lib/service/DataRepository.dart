@@ -69,6 +69,13 @@ class DataRepository {
     return queryResult.map((e) => ClinicDetail.fromMap(e)).toList();
   }
 
+  Future<List<Consultation>> getAllConsultation() async {
+    final Database db = await initializedDB();
+    final List<Map<String, Object?>> queryResult =
+        await db.query(CONSULTATION_TABLE);
+    return queryResult.map((e) => Consultation.fromMap(e)).toList();
+  }
+
   Future<List<ClinicDetail>> getAllActiveClinic() async {
     final Database db = await initializedDB();
     final List<Map<String, Object?>> queryResult =

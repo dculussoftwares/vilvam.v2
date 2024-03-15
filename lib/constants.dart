@@ -16,6 +16,10 @@ const double largeWidthBreakpoint = 1500;
 
 const double transitionLength = 500;
 
+const patientSheet = 'Patient';
+const clinicsSheet = 'Clinics';
+const consultationSheet = 'Consultation';
+
 // Whether the user has chosen a theme color via a direct [ColorSeed] selection,
 // or an image [ColorImageProvider].
 enum ColorSelectionMethod {

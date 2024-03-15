@@ -17,6 +17,7 @@ import 'package:material_3_demo/pages/add_patient_page.dart';
 import 'package:material_3_demo/pages/export_data_page.dart';
 import 'package:material_3_demo/pages/patient_detail_page.dart';
 import 'package:material_3_demo/pages/search_patients_page.dart';
+import 'package:material_3_demo/service/DataExportService.dart';
 import 'package:material_3_demo/service/DataRepository.dart';
 import 'package:material_3_demo/service/locale_logic.dart';
 import 'package:material_3_demo/service/settings_logic.dart';
@@ -126,6 +127,7 @@ class EntryPoint extends StatelessWidget with GetItMixin {
 
 void registerSingletons() {
   GetIt.I.registerLazySingleton<DataRepository>(() => DataRepository());
+  GetIt.I.registerLazySingleton<DataExportService>(() => DataExportService());
   GetIt.I.registerLazySingleton<SettingsLogic>(() => SettingsLogic());
   GetIt.I.registerLazySingleton<LocaleLogic>(() => LocaleLogic());
 }
@@ -325,6 +327,7 @@ class _AppState extends State<App> {
 AppStyle get $styles => _AppState.style;
 
 DataRepository get dataRepository => GetIt.I.get<DataRepository>();
+DataExportService get dataExportService => GetIt.I.get<DataExportService>();
 
 SettingsLogic get settingsLogic => GetIt.I.get<SettingsLogic>();
 
