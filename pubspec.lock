@@ -4,7 +4,7 @@ packages:
   analysis_defaults:
     dependency: "direct dev"
     description:
-      path: "../analysis_defaults"
+      path: analysis_defaults
       relative: true
     source: path
     version: "0.0.0"
@@ -763,7 +763,7 @@ packages:
   web_startup_analyzer:
     dependency: "direct main"
     description:
-      path: "../web/_packages/web_startup_analyzer"
+      path: "webp/web/_packages/web_startup_analyzer"
       relative: true
     source: path
     version: "0.1.0-wip"
